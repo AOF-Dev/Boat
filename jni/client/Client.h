@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <android/log.h>
-
+#include <dlfcn.h>
 
 #include "boat.h"
 
@@ -21,7 +21,7 @@ public :
 	
     EGLDisplay display;
     EGLSurface surface;
-    EGLContext context;
+    EGLConfig config;
 	
 	ANativeWindow* window;
 	
@@ -35,8 +35,11 @@ public :
 	void teardownDisplay();
 	void setWindow(ANativeWindow*);
 	bool eglSwapBuffers_func();
-	bool eglMakeCurrent_func();
-	
+	bool eglMakeCurrent_func(void*);
+	bool eglSwapInterval_func(int);
+	bool eglDestroyContext_func(void*);
+	void* eglCreateContext_func(void*);
+	void* eglGetCurrentContext_func();
 	
 public :
     static Client* mClient;

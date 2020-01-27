@@ -20,10 +20,21 @@ extern "C"{
 bool eglSwapBuffers(){
 	return Server::mServer->mBoat->client->eglSwapBuffers_func();
 }
-bool eglMakeCurrent(){
-	return Server::mServer->mBoat->client->eglMakeCurrent_func();
+bool eglMakeCurrent(void* context){
+	return Server::mServer->mBoat->client->eglMakeCurrent_func(context);
 }
-
+void* eglCreateContext(void* shared_context){
+	return Server::mServer->mBoat->client->eglCreateContext_func(shared_context);
+}
+void* eglGetCurrentContext(){
+	return Server::mServer->mBoat->client->eglGetCurrentContext_func();
+}
+bool eglDestroyContext(void* context){
+	return Server::mServer->mBoat->client->eglDestroyContext_func(context);
+}
+bool eglSwapInterval(int value){
+	return Server::mServer->mBoat->client->eglSwapInterval_func(value);
+}
 int getWindowHeight(){
    return Server::mServer->mBoat->client->height;
 }

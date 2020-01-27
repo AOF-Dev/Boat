@@ -34,12 +34,10 @@ int Client::initDisplay(){
 		EGL_NONE};
     EGLint w;
     EGLint h;
-    EGLint dummy;
     EGLint format;
     EGLint numConfigs;
     EGLConfig  config;
     EGLSurface surface;
-    EGLContext context;
 	EGLDisplay display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
 	
     eglInitialize(display, 0, 0);
@@ -49,21 +47,15 @@ int Client::initDisplay(){
     ANativeWindow_setBuffersGeometry(this->window, 0, 0, format );
 	
     surface = eglCreateWindowSurface(display, config, this->window, NULL );
-    context = eglCreateContext(display, config, NULL, NULL );
 	
-    if ( EGL_FALSE == eglMakeCurrent(display, surface, surface, context ) )
-    {
-        return -1;
-    }
-
     eglQuerySurface(display, surface, EGL_WIDTH, &w );
     eglQuerySurface(display, surface, EGL_HEIGHT, &h );
 
     this->display = display;
-    this->context = context;
     this->surface = surface;
     this->width = w;
     this->height = h;
+	this->config = config;
 	
 	
 	/*
@@ -80,11 +72,7 @@ void Client::teardownDisplay(){
 	if ( this->display != EGL_NO_DISPLAY )
     {
         eglMakeCurrent(this->display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT );
-        if ( this->context != EGL_NO_CONTEXT )
-        {
-            eglDestroyContext(this->display, this->context );
-        }
-
+        
         if ( this->surface != EGL_NO_SURFACE )
         {
             eglDestroySurface( this->display, this->surface );
@@ -94,7 +82,6 @@ void Client::teardownDisplay(){
     }
 
     this->display = EGL_NO_DISPLAY;
-    this->context = EGL_NO_CONTEXT;
     this->surface = EGL_NO_SURFACE;
 }
 
@@ -102,9 +89,44 @@ bool Client::eglSwapBuffers_func(){
 	//__android_log_print(ANDROID_LOG_ERROR, "Boat", "eglSwapBuffers");
 	return eglSwapBuffers( this->display, this->surface );	
 }
-bool Client::eglMakeCurrent_func(){
-	__android_log_print(ANDROID_LOG_ERROR, "BoatClient", "Try to eglMakeCurrent");
-	return eglMakeCurrent(this->display, this->surface, this->surface, this->context );
+bool Client::eglMakeCurrent_func(void* context){
+	
+	bool retval = eglMakeCurrent(this->display, this->surface, this->surface, (EGLContext)context );
+	
+	__android_log_print(ANDROID_LOG_ERROR, "BoatClient", "Try to eglMakeCurrent : %d", eglGetError());
+	
+	return retval;
+}
+
+void* Client::eglGetCurrentContext_func(){
+	
+    return eglGetCurrentContext();
+}
+
+void* Client::eglCreateContext_func(void* shared_context){
+	
+	const EGLint
+    contextAttribs[] = {
+		EGL_CONTEXT_CLIENT_VERSION, 2,
+		EGL_NONE};
+    void* context = eglCreateContext(this->display, this->config, (EGLContext)shared_context, contextAttribs );
+	
+	__android_log_print(ANDROID_LOG_ERROR, "BoatClient", "Try to eglCreateContext : %d", eglGetError());
+	
+	return context;
+   
+}
+bool Client::eglDestroyContext_func(void* context){
+	
+    bool retval = eglDestroyContext(this->display, (EGLContext)context );
+	
+	__android_log_print(ANDROID_LOG_ERROR, "BoatClient", "Try to eglDestroyContext : %d", eglGetError());
+	
+	return retval;
+}
+
+bool Client::eglSwapInterval_func(int value){
+	return eglSwapInterval(this->display, value);	
 }
 
 //__android_log_print(ANDROID_LOG_ERROR, "Boat", "Request: %d", this->request);

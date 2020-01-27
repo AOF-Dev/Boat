@@ -14,6 +14,12 @@
 		android:layout_alignParentTop="true"
 		android:alpha="0.0"/>
 
+	<ImageView
+		android:layout_height="16dp"
+		android:layout_width="16dp"
+		android:src="@drawable/cursor"
+		android:id="@+id/mouse_cursor"/>
+
 	<Button
 		android:textSize="32sp"
 		android:id="@+id/control_down"
@@ -49,81 +55,6 @@
 		android:text="@string/control_inventory"
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentBottom="true"/>
-
-	<LinearLayout
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="0dp"
-		android:layout_alignParentBottom="true"
-		android:orientation="horizontal"
-		android:layout_centerInParent="true"
-		android:layout_centerHorizontal="true"
-		android:alpha="0.0">
-
-		<Button
-			android:textSize="20sp"
-			android:id="@+id/control_1"
-			android:background="@drawable/control_button"
-			android:layout_width="30dp"
-			android:layout_height="30dp"/>
-
-		<Button
-			android:textSize="20sp"
-			android:id="@+id/control_2"
-			android:background="@drawable/control_button"
-			android:layout_width="30dp"
-			android:layout_height="30dp"/>
-
-		<Button
-			android:textSize="20sp"
-			android:id="@+id/control_3"
-			android:background="@drawable/control_button"
-			android:layout_width="30dp"
-			android:layout_height="30dp"/>
-
-		<Button
-			android:textSize="20sp"
-			android:id="@+id/control_4"
-			android:background="@drawable/control_button"
-			android:layout_width="30dp"
-			android:layout_height="30dp"/>
-
-		<Button
-			android:textSize="20sp"
-			android:id="@+id/control_5"
-			android:background="@drawable/control_button"
-			android:layout_width="30dp"
-			android:layout_height="30dp"/>
-
-		<Button
-			android:textSize="20sp"
-			android:id="@+id/control_6"
-			android:background="@drawable/control_button"
-			android:layout_width="30dp"
-			android:layout_height="30dp"/>
-
-		<Button
-			android:textSize="20sp"
-			android:id="@+id/control_7"
-			android:background="@drawable/control_button"
-			android:layout_width="30dp"
-			android:layout_height="30dp"/>
-
-		<Button
-			android:textSize="20sp"
-			android:id="@+id/control_8"
-			android:background="@drawable/control_button"
-			android:layout_width="30dp"
-			android:layout_height="30dp"/>
-
-		<Button
-			android:textSize="20sp"
-			android:id="@+id/control_9"
-			android:background="@drawable/control_button"
-			android:layout_width="30dp"
-			android:layout_height="30dp"/>
-
-	</LinearLayout>
 
 	<Button
 		android:textSize="32sp"
@@ -173,11 +104,92 @@
 		android:layout_alignParentRight="true"
 		android:layout_alignParentBottom="true"/>
 
-	<ImageView
-		android:layout_height="16dp"
-		android:layout_width="16dp"
-		android:src="@drawable/cursor"
-		android:id="@+id/mouse_cursor"/>
+	<LinearLayout
+		android:layout_width="270dp"
+		android:layout_height="30dp"
+		android:layout_marginBottom="0dp"
+		android:layout_alignParentBottom="true"
+		android:orientation="horizontal"
+		android:layout_centerInParent="true"
+		android:layout_centerHorizontal="true"
+		android:alpha="0.2"
+		android:id="@+id/item_bar"
+		android:visibility="invisible"
+		android:weightSum="9.0">
+
+		<Button
+			android:textSize="20sp"
+			android:id="@+id/control_1"
+			android:background="@drawable/control_button"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1.0"/>
+
+		<Button
+			android:textSize="20sp"
+			android:id="@+id/control_2"
+			android:background="@drawable/control_button"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1.0"/>
+
+		<Button
+			android:textSize="20sp"
+			android:id="@+id/control_3"
+			android:background="@drawable/control_button"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1.0"/>
+
+		<Button
+			android:textSize="20sp"
+			android:id="@+id/control_4"
+			android:background="@drawable/control_button"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1.0"/>
+
+		<Button
+			android:textSize="20sp"
+			android:id="@+id/control_5"
+			android:background="@drawable/control_button"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1.0"/>
+
+		<Button
+			android:textSize="20sp"
+			android:id="@+id/control_6"
+			android:background="@drawable/control_button"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1.0"/>
+
+		<Button
+			android:textSize="20sp"
+			android:id="@+id/control_7"
+			android:background="@drawable/control_button"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1.0"/>
+
+		<Button
+			android:textSize="20sp"
+			android:id="@+id/control_8"
+			android:background="@drawable/control_button"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1.0"/>
+
+		<Button
+			android:textSize="20sp"
+			android:id="@+id/control_9"
+			android:background="@drawable/control_button"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1.0"/>
+
+	</LinearLayout>
 
 	<Button
 		android:textSize="20sp"

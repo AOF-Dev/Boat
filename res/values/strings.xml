@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Boat</string>
 	<string name="play">Play</string>
-	<string name="exec_command">Execute Command</string>
+	<string name="excute">Excute</string>
+	<string name="install">Install</string>
 	<string name="mouse_primary">Pri</string>
     <string name="mouse_secondary">Sec</string>
     <string name="control_chat">Chat</string>

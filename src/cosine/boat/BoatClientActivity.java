@@ -24,6 +24,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import org.lwjgl.input.Keyboard;
+import java.io.*;
 
 
 public class BoatClientActivity extends NativeActivity implements View.OnClickListener, View.OnTouchListener, TextWatcher, TextView.OnEditorActionListener
@@ -65,6 +66,7 @@ public class BoatClientActivity extends NativeActivity implements View.OnClickLi
 		control7 = this.findButton(R.id.control_7);
 		control8 = this.findButton(R.id.control_8);
 		control9 = this.findButton(R.id.control_9);
+		itemBar = (LinearLayout)base.findViewById(R.id.item_bar);
 		mousePrimary = this.findButton(R.id.mouse_primary);
 		mouseSecondary = this.findButton(R.id.mouse_secondary);
 		esc = this.findButton(R.id.esc);
@@ -123,8 +125,12 @@ public class BoatClientActivity extends NativeActivity implements View.OnClickLi
 		new Thread(){
 			@Override
 			public void run(){
-				Config config = Config.getConfig(getIntent().getExtras().getString("config"));
+				LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
 				LoadMe.exec(config, BoatClientActivity.this);		
+				Message msg=new Message();
+				msg.what = -1;
+				mHandler.sendMessage(msg);
+				
 			}
 		}.start();
 		
@@ -153,6 +159,7 @@ public class BoatClientActivity extends NativeActivity implements View.OnClickLi
 	private Button control7;
 	private Button control8;
 	private Button control9;
+	private LinearLayout itemBar;
 	private Button mousePrimary;
 	private Button mouseSecondary;
 	private Button controlChat;
@@ -173,13 +180,16 @@ public class BoatClientActivity extends NativeActivity implements View.OnClickLi
 			{
 				case 1:
 					BoatClientActivity.this.mouseCursor.setVisibility(View.INVISIBLE);
+					BoatClientActivity.this.itemBar.setVisibility(View.VISIBLE);
 					BoatClientActivity.this.mode = true;
 					break;
 				case 0:
 					BoatClientActivity.this.mouseCursor.setVisibility(View.VISIBLE);
+					BoatClientActivity.this.itemBar.setVisibility(View.INVISIBLE);
 					BoatClientActivity.this.mode = false;
 					break;
 				default:
+				    BoatClientActivity.this.finish();
 				    break;
 			}
 		}

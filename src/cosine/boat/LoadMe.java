@@ -2,6 +2,7 @@ package cosine.boat;
 
 import java.io.IOException;
 import java.util.*;
+import java.io.*;
 
 public class LoadMe {
     
@@ -16,19 +17,17 @@ public class LoadMe {
         System.loadLibrary("boat");
     }
 	
-    public static int exec(Config config, BoatClientActivity activity) {
+    public static int exec(LauncherConfig config, BoatClientActivity activity) {
         try {
 			
-			Vector<String> args = new Vector<String>();
-			
-			
+			MinecraftVersion mcVersion = MinecraftVersion.fromDirectory(new File(config.get("currentVersion")));
 			
 			String runtimePath = config.get("runtimePath");
 			String libraryPath = runtimePath + "/j2re-image/lib/aarch32/jli:" + runtimePath + "/j2re-image/lib/aarch32:" + runtimePath;
-			MinecraftVersion currentMinecraft = MinecraftVersion.getVersion(config.get("currentVersion"));
-			String classPath = currentMinecraft.jarFile + ":" + runtimePath + "/lwjgl.jar:" + runtimePath + "/lwjgl_util.jar:" + currentMinecraft.getClassPath(config);
+			String home = config.get("home");
+			String classPath = config.get("runtimePath") + "/lwjgl.jar:" + config.get("runtimePath") + "/lwjgl_util.jar:" + mcVersion.getClassPath(config);
 			
-			setenv("HOME", config.get("home"));
+			setenv("HOME", home);
 			setenv("JAVA_HOME" ,runtimePath + "/j2re-image");
 			setenv("BOAT_INPUT_PORT", Integer.toString(activity.mInputEventSender.port));
             
@@ -42,6 +41,11 @@ public class LoadMe {
 			dlopen(runtimePath + "/j2re-image/lib/aarch32/libawt_headless.so");
 			
 			dlopen("libserver.so");
+			/*
+			setenv("LIBGL_ES", "1");
+			setenv("LIBGL_GL", "15");
+			*/
+
 			
 			dlopen(runtimePath + "/libopenal.so.1");
 			dlopen(runtimePath + "/libGL.so.1");
@@ -49,23 +53,26 @@ public class LoadMe {
 					
 			setupJLI();	
 			
-            redirectStdio(config.get("home") + "/boat_output.txt");
-            chdir(config.get("home"));
+            redirectStdio(home + "/boat_output.txt");
+            chdir(home);
 			
-			String extraJavaFlags[] = config.get("extraJavaFlags").split(" ");
+			Vector<String> args = new Vector<String>();
+			
+			
 			
 			args.add(runtimePath +  "/j2re-image/bin/java");
 			args.add("-cp");
 			args.add(classPath);
 			args.add("-Djava.library.path=" + libraryPath);
 			
+			String extraJavaFlags[] = config.get("extraJavaFlags").split(" ");
 			for (String flag : extraJavaFlags){
 				args.add(flag);
 			}
 			
-			args.add(currentMinecraft.mainClass);
+			args.add(mcVersion.mainClass);
 			
-			String minecraftArgs[] = currentMinecraft.getMinecraftArguments(config);	
+			String minecraftArgs[] = mcVersion.getMinecraftArguments(config);	
 			for (String flag : minecraftArgs){
 				args.add(flag);
 			}
