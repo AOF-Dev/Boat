@@ -20,7 +20,8 @@
 		android:theme="@style/BoatTheme" 
 		android:label="@string/app_name" 
 		android:largeHeap="true"
-		android:icon="@drawable/ic_boat">
+		android:icon="@drawable/ic_boat"
+		android:name="cosine.boat.BoatApplication">
         <activity 
 			android:label="@string/app_name" 
 			android:name="LauncherActivity" 
@@ -36,15 +37,19 @@
 		<service 
 			android:name="cosine.boat.logcat.LogcatService" 
 			android:process=":logcatprocess"/>
-		<activity android:name="BoatClientActivity"
+		<activity android:name="BoatActivity"
 			android:theme="@style/FullScreenTheme"
 			android:label="@string/app_name"
 			android:configChanges="orientation|keyboardHidden"
-			android:screenOrientation="sensorLandscape">
+			android:screenOrientation="sensorLandscape"
+			
+			android:excludeFromRecents="false"
+			android:launchMode="singleInstance"
+			android:alwaysRetainTaskState="true">
 			
 			<meta-data 
 				android:name="android.app.lib_name"
-				android:value="client" />
+				android:value="boat" />
 			
         </activity>
     </application>

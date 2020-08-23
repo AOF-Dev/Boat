@@ -22,10 +22,6 @@ import android.os.Message;
 public class LauncherActivity extends Activity implements View.OnClickListener, View.OnLongClickListener
 {
 
-	
-	
-	
-	
     public Button playButton;
 	public EditText configText;
     public Button excuteButton;
@@ -37,19 +33,34 @@ public class LauncherActivity extends Activity implements View.OnClickListener, 
 		@Override
 		public void handleMessage(Message msg)
 		{
-
 			
-			
-			switch (msg.what)
-			{
-
-				default:
-					outputText.append("\n" + result + "\n");
-					outputText.append("\n");
-					outputText.append("\n" + error + "\n");
-					
+			switch (msg.what){
+				case -1:
+					outputText.append("No such file!\n");
 					break;
-				
+				case -2:
+					outputText.append("Installing...\n");
+					break;
+				case -3:
+					outputText.append("Package has been extracted in " + getDir("runtime", 0).getAbsolutePath() + "\n");
+					break;
+				case -4:
+					outputText.append("Try to set executing permission: true\n");
+					break;
+				case -5:
+					outputText.append("Try to set executing permission: false\n");
+					break;
+				case -6:
+					outputText.append("Setting up property...\n");
+					break;
+				case -7:
+					outputText.append("Finished!\n");
+					break;
+				default:
+					outputText.append(result + "\n");
+					outputText.append("\n");
+					outputText.append(error + "\n");
+					outputText.append("Command process exited with value: " + msg.what + "\n");
 			}
 			
 			
@@ -97,25 +108,14 @@ public class LauncherActivity extends Activity implements View.OnClickListener, 
 		this.outputText = (TextView)findViewById(R.id.launcher_output_text);
 		
 		
-		this.busybox = new File(this.getDir("runtime", 0), "busybox");
-		if (!busybox.exists()){
-			Utils.extractAsset(this.getAssets(), "busybox", busybox.getAbsolutePath());
-			Log.i("Launcher", "Busybox has been extracted in " + busybox.getAbsolutePath());
-			busybox.setExecutable(true);
-		}
-		else{
-			Log.i("Launcher", "Busybox has been installed in " + busybox.getAbsolutePath());
-		}
-		
 		outputText.append("Runtime directory: " + this.getDir("runtime", 0) + "\n");
-		outputText.append("Busybox: " + busybox + "\n");
 		
 		
     }
 	
-	private File busybox;
 	private String result = "";
 	private String error = "";
+	
 	public void excuteCommand(final String args[]){
 		
 		
@@ -164,12 +164,58 @@ public class LauncherActivity extends Activity implements View.OnClickListener, 
 		
 	}
 	
+	public void install(final String packagePath){
+		new Thread(){
+			@Override
+			public void run(){
+				Message endMsg = null;
+				File packageFile = new File(packagePath);
+				if (!packageFile.exists()){
+					endMsg = new Message();
+					endMsg.what = -1;
+					mHandler.sendMessage(endMsg);
+					
+				}
+				endMsg = new Message();
+				endMsg.what = -2;
+				mHandler.sendMessage(endMsg);
+				
+				Utils.extractTarXZ(packagePath, getDir("runtime", 0));
+				endMsg = new Message();
+				endMsg.what = -3;
+				mHandler.sendMessage(endMsg);
+				
+				if (Utils.setExecutable(getDir("runtime", 0))){
+					endMsg = new Message();
+					endMsg.what = -4;
+					mHandler.sendMessage(endMsg);
+				}
+				else{
+					endMsg = new Message();
+					endMsg.what = -5;
+					mHandler.sendMessage(endMsg);
+				}
+				endMsg = new Message();
+				endMsg.what = -6;
+				mHandler.sendMessage(endMsg);
+				
+				LauncherConfig config = LauncherConfig.fromFile(configText.getText().toString());
+				config.remove("runtimePath");
+				config.put("runtimePath", getDir("runtime", 0).getAbsolutePath());
+				LauncherConfig.toFile(configText.getText().toString(), config);
+				endMsg = new Message();
+				endMsg.what = -7;
+				mHandler.sendMessage(endMsg);
+			}
+		}.start();
+	}
+	
 	//OnClickListener
     public void onClick(View v) {
         if (v == this.playButton) {
 			
 			
-            Intent i = new Intent(this, BoatClientActivity.class);
+            Intent i = new Intent(this, BoatActivity.class);
 			Bundle bundle=new Bundle();
 			bundle.putString("config", configText.getText().toString());
 			i.putExtras(bundle);
@@ -181,27 +227,13 @@ public class LauncherActivity extends Activity implements View.OnClickListener, 
 			if (!mode){
 				if (!inputText.getText().equals("")){
 					String packagePath = inputText.getText().toString();
-					
-					excuteCommand(new String[]{busybox.getAbsolutePath(), "tar", "-xJvf", packagePath, "-C",  getDir("runtime", 0).getAbsolutePath()});
-					excuteCommand(new String[]{busybox.getAbsolutePath(), "chmod", "-R", "0777", getDir("runtime", 0).getAbsolutePath()});
-					
-					LauncherConfig config = LauncherConfig.fromFile(this.configText.getText().toString());
-					config.remove("runtimePath");
-					config.put("runtimePath", getDir("runtime", 0).getAbsolutePath());
-					LauncherConfig.toFile(this.configText.getText().toString(), config);
-					
+					install(packagePath);
 				}
 			}
 			else{
 				if (!inputText.getText().equals("")){
 					String cmd = inputText.getText().toString();
-					if (cmd.equals("busybox")){
-						excuteCommand(new String[]{busybox.getAbsolutePath()});
-					}
-					else{
-						cmd = busybox + " " + cmd;
-						excuteCommand(cmd.split(" "));
-					}
+					excuteCommand(cmd.split(" "));
 
 				}
 			}
@@ -209,7 +241,6 @@ public class LauncherActivity extends Activity implements View.OnClickListener, 
 		}
 		
     }
-	
 	
 	//OnLongClickListener
 	@Override
