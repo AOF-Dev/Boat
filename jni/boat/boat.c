@@ -1,8 +1,9 @@
 #include "boat.h"
 
+#include <stdlib.h>
+
 ANativeWindow* boatGetNativeWindow(){	
-    //__android_log_print(ANDROID_LOG_ERROR, "Boat", "boatGetNativeWindow : %p", mBoat.window);
-    return mBoat.window;
+        return mBoat.window;
 }
 
 void* boatGetNativeDisplay(){
@@ -11,12 +12,9 @@ void* boatGetNativeDisplay(){
 
 void boatGetCurrentEvent(BoatInputEvent* event){
 	memcpy(event, &mBoat.current_event, sizeof(BoatInputEvent));
-	//__android_log_print(ANDROID_LOG_ERROR, "Boat", "", mBoat.window);
-    
-	
 }
 
-void boatSetCurrentEventProcessor(void (*processor)()){
+void boatSetCurrentEventProcessor(BoatEventProcessor processor){
 	mBoat.current_event_processor = processor;
 }
 void boatSetCursorMode(int mode){
@@ -54,8 +52,6 @@ void boatSetCursorMode(int mode){
 
 JNIEXPORT void JNICALL Java_cosine_boat_BoatInput_send(JNIEnv* env, jclass clazz, jlong time, jint type, jint p1, jint p2){
 	
-	
-	
 	mBoat.current_event.time = time;
 	mBoat.current_event.type = type;
 	
@@ -78,8 +74,7 @@ JNIEXPORT void JNICALL Java_cosine_boat_BoatInput_send(JNIEnv* env, jclass clazz
 }
 
 
-JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved)
-{
+JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
 	
 	mBoat.android_jvm = vm;
 	

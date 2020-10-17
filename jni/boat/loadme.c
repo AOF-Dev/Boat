@@ -2,37 +2,35 @@
 #include <fcntl.h>
 #include <jni.h>
 #include <dlfcn.h>
-
+#include <stdlib.h>
 #include <android/log.h>
-
-
 
 JNIEXPORT void JNICALL Java_cosine_boat_LoadMe_redirectStdio(JNIEnv* env, jclass clazz, jstring path){
 	
 	char const* file = (*env)->GetStringUTFChars(env , path , 0);
     
-    int fd = open(file , O_WRONLY | O_CREAT | O_TRUNC, 0666);
+        int fd = open(file , O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	dup2(fd, 1);
 	dup2(fd, 2);
 	
-    (*env)->ReleaseStringUTFChars(env , path , file);
+        (*env)->ReleaseStringUTFChars(env , path , file);
 }
 
 JNIEXPORT jint JNICALL Java_cosine_boat_LoadMe_chdir(JNIEnv* env, jclass clazz, jstring path){
     
-    char const* dir = (*env)->GetStringUTFChars(env ,path ,0);
-    int b = chdir(dir);
-    (*env)->ReleaseStringUTFChars(env ,path , dir);
-    return b;
+        char const* dir = (*env)->GetStringUTFChars(env ,path ,0);
+        int b = chdir(dir);
+        (*env)->ReleaseStringUTFChars(env ,path , dir);
+        return b;
 }
 JNIEXPORT void JNICALL Java_cosine_boat_LoadMe_setenv(JNIEnv* env, jclass clazz, jstring str1, jstring str2){
-    char const* name = (*env)->GetStringUTFChars(env ,str1 , 0);
-    char const* value = (*env)->GetStringUTFChars(env, str2 , 0);
+        char const* name = (*env)->GetStringUTFChars(env ,str1 , 0);
+        char const* value = (*env)->GetStringUTFChars(env, str2 , 0);
     
-    setenv(name , value ,1);
+        setenv(name , value ,1);
     
-    (*env)->ReleaseStringUTFChars(env , str1 , name);
-    (*env)->ReleaseStringUTFChars(env ,str2 , value);
+        (*env)->ReleaseStringUTFChars(env , str1 , name);
+        (*env)->ReleaseStringUTFChars(env ,str2 , value);
 }
 
 
@@ -49,9 +47,9 @@ JNIEXPORT jint JNICALL Java_cosine_boat_LoadMe_dlopen(JNIEnv* env, jclass clazz,
 		__android_log_print(ANDROID_LOG_ERROR, "Boat", "%s : loaded shared library.", lib_name );
 	}
     
-    (*env)->ReleaseStringUTFChars(env , str1 , lib_name);
+        (*env)->ReleaseStringUTFChars(env , str1 , lib_name);
+        return 0;
 }
-
 
 
 
@@ -105,8 +103,6 @@ JNIEXPORT jint JNICALL Java_cosine_boat_LoadMe_jliLaunch(JNIEnv *env, jclass cla
 		buf[len] = 0;
 		argv[i] = buf;
 	}
-	
-	
 	
 	return JLI_Launch(argc, argv,
                    sizeof(const_jargs) / sizeof(char *), const_jargs,
