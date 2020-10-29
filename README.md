@@ -32,8 +32,8 @@ This repository contains the Android app part of Boat. Other packages could be f
   - [GL4ES](https://github.com/ptitSeb/gl4es).
   - [OpenAL-soft](https://github.com/kcat/openal-soft). 
   - [LWJGL 2 port for Boat](https://github.com/CosineMath/lwjgl-boat).
-  - [Build GLFW port for Boat](https://github.com/CosineMath/glfw-boat).
-  - [Build LWJGL 3 port for Boat](https://github.com/CosineMath/lwjgl3-boat).
+  - [GLFW port for Boat](https://github.com/CosineMath/glfw-boat).
+  - [LWJGL 3 port for Boat](https://github.com/CosineMath/lwjgl3-boat).
   - [JNDCrash](https://github.com/ivanarh/jndcrash)
   - [Gson](https://github.com/google/gson)
   - [Commons Compress](https://github.com/apache/commons-compress).
