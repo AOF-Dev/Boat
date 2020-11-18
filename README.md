@@ -8,7 +8,7 @@
 - [License](#License)
 
 ## Introducion
-  Boat provides an environment to run Minecraft Java Edition on Android. It evolves from zhuowei's Boarwalk(https://github.com/zhuowei/Boardwalk). Boat includes a series of Android ports of important software packages.
+  Boat provides an environment to run Minecraft Java Edition on Android. It evolves from zhuowei's [Boarwalk](https://github.com/zhuowei/Boardwalk). Boat includes a series of Android ports of important software packages.
 This repository contains the Android app part of Boat. Other packages could be found in respective repositories. Please look at [Components](#Components).
   
   This app includes a very simple Minecraft launcher, only for test.
@@ -43,5 +43,5 @@ This repository contains the Android app part of Boat. Other packages could be f
   - [MCinaBox](https://github.com/longjunyu2/MCinaBox). A Minecraft Java Edition Launcher on Android. Using Boat to provide runtime environment.
   
 ## License
-  This app project is distributed under [LGPL v2.1](http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html). Other components have their respective license.
+  This app project is distributed under [GPL v2.0](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html). Other components have their respective license.
   
