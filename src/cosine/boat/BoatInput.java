@@ -2,6 +2,7 @@ package cosine.boat;
 
 
 import android.app.*;
+import android.content.*;
 
 public class BoatInput{
 	
@@ -21,6 +22,7 @@ public class BoatInput{
 	
 	public static final int CursorEnabled         = 1;
 	public static final int CursorDisabled        = 0;
+	public static final int CursorSetPos          = 2;
 	
 	static {
         System.loadLibrary("boat");
@@ -51,4 +53,37 @@ public class BoatInput{
 		
 	}
 	
+	public static void setCursorPos(int x, int y){
+		
+		Activity activity = BoatApplication.getCurrentActivity();
+		if (activity instanceof BoatActivity){
+			BoatActivity boatActivity = (BoatActivity)activity;
+			boatActivity.setCursorPos(x, y);
+		}
+		
+	}
+	
+	public static void setPrimaryClipString(String string){
+	        Activity activity = BoatApplication.getCurrentActivity();
+	        if (activity instanceof BoatActivity){
+			ClipboardManager clipboard = (ClipboardManager)activity.getSystemService(Context.CLIPBOARD_SERVICE);
+		        ClipData clip = ClipData.newPlainText("Boat Clipboard", string);
+		        clipboard.setPrimaryClip(clip);
+		}
+		
+	}
+	
+	public static String getPrimaryClipString(){
+	        Activity activity = BoatApplication.getCurrentActivity();
+	        if (activity instanceof BoatActivity){
+	                
+			ClipboardManager clipboard = (ClipboardManager)activity.getSystemService(Context.CLIPBOARD_SERVICE);
+			if (!clipboard.hasPrimaryClip()) {
+			        return null;
+	                }
+		        ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+		        return item.getText();
+		}
+		
+	}
 }

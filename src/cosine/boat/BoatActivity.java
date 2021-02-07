@@ -3,7 +3,6 @@ package cosine.boat;
 
 import android.view.MotionEvent;
 import android.os.Bundle;
-import android.app.NativeActivity;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.view.LayoutInflater;
@@ -24,9 +23,12 @@ import android.view.inputmethod.EditorInfo;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.ViewGroup;
+import android.view.TextureView;
+import android.view.Surface;
+import android.graphics.SurfaceTexture;
 
 
-public class BoatActivity extends NativeActivity implements View.OnClickListener, View.OnTouchListener, TextWatcher, TextView.OnEditorActionListener
+public class BoatActivity extends Activity implements View.OnClickListener, View.OnTouchListener, TextWatcher, TextView.OnEditorActionListener, TextureView.SurfaceTextureListener   
 {
 	
 	@Override
@@ -35,7 +37,9 @@ public class BoatActivity extends NativeActivity implements View.OnClickListener
 		
 		// TODO: Implement this method
 		super.onCreate(savedInstanceState);
-		
+		mainTextureView = new TextureView(this);
+                mainTextureView.setSurfaceTextureListener(this);
+                setContentView(mainTextureView);
 		popupWindow = new PopupWindow();
 		popupWindow.setWidth(LayoutParams.FILL_PARENT);
 		popupWindow.setHeight(LayoutParams.FILL_PARENT);
@@ -112,14 +116,16 @@ public class BoatActivity extends NativeActivity implements View.OnClickListener
 
 	}
 
-
-	@Override
-	public void surfaceCreated(SurfaceHolder holder)
-	{
-		// TODO: Implement this method
-		
-		super.surfaceCreated(holder);
-		System.out.println("Surface is created!");
+        
+        public static native void setBoatNativeWindow(Surface surface);
+        static {
+                System.loadLibrary("boat");
+        }
+        public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+        
+                // TODO: Implement this method
+		System.out.println("SurfaceTexture is available!");
+		BoatActivity.setBoatNativeWindow(new Surface(surface));
 		
 		new Thread(){
 			@Override
@@ -127,17 +133,38 @@ public class BoatActivity extends NativeActivity implements View.OnClickListener
 				
 				LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
 				LoadMe.exec(config);		
-				Message msg=new Message();
+				Message msg = new Message();
 				msg.what = -1;
 				mHandler.sendMessage(msg);
 			}
 		}.start();
-	}
+        }
+
+        public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+            
+        }
+
+        public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+                return false;
+        }
+
+        public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+                
+        }
 	
 	public void setCursorMode(int mode){
 		
-		Message msg=new Message();
+		Message msg = new Message();
 		msg.what = mode;
+		mHandler.sendMessage(msg);
+	}
+	
+	public void setCursorPos(int x, int y){
+		
+		Message msg = new Message();
+		msg.what = BoatInput.CursorSetPos;
+		msg.arg1 = x;
+		msg.arg2 = y;
 		mHandler.sendMessage(msg);
 	}
 
@@ -168,6 +195,7 @@ public class BoatActivity extends NativeActivity implements View.OnClickListener
 	private Button controlCommand;
 	private Button control3rd;
 	private ImageView mouseCursor;
+	private TextureView mainTextureView;
 	private Button esc;
 	
 	private EditText inputScanner;
@@ -196,6 +224,14 @@ public class BoatActivity extends NativeActivity implements View.OnClickListener
 					BoatActivity.this.mouseCursor.setVisibility(View.VISIBLE);
 					BoatActivity.this.itemBar.setVisibility(View.INVISIBLE);
 					BoatActivity.this.cursorMode = BoatInput.CursorEnabled;
+					break;
+				case BoatInput.CursorSetPos:
+					BoatActivity.this.mouseCursor.setX(msg.arg1);
+					BoatActivity.this.mouseCursor.setY(msg.arg2);
+					BoatActivity.this.initialX = msg.arg1;
+					BoatActivity.this.initialY = msg.arg2;
+					BoatActivity.this.baseX = msg.arg1;
+					BoatActivity.this.baseY = msg.arg2;
 					break;
 				default:
 				    BoatActivity.this.finish();
@@ -256,7 +292,7 @@ public class BoatActivity extends NativeActivity implements View.OnClickListener
 		
 		BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Return, '\n', true);
 		BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Return, '\n', false);
-        return false;  
+                return false;  
 	}
 	
 	@Override
@@ -304,11 +340,11 @@ public class BoatActivity extends NativeActivity implements View.OnClickListener
 		if (p1 == controlChat){
 			
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_t, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_T, 0, true);
 
 			}
 			if (p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_t, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_T, 0, false);
 
 			}
 			
@@ -317,10 +353,10 @@ public class BoatActivity extends NativeActivity implements View.OnClickListener
 		if (p1 == controlCommand){
 
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_slash, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_SLASH, 0, true);
 			}
 			if (p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_slash, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_SLASH, 0, false);
 			}
 
 			return false;
@@ -328,11 +364,11 @@ public class BoatActivity extends NativeActivity implements View.OnClickListener
 		if (p1 == control3rd){
 
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_F5, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_F5, 0, true);
 
 			}
 			if (p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_F5, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_F5, 0, false);
 
 			}
 
@@ -340,154 +376,154 @@ public class BoatActivity extends NativeActivity implements View.OnClickListener
 		}
 		if (p1 == control1){
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_1, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_1, 0, true);
 
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_1, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_1, 0, false);
 
 			}
 			return false;
 		}
 		if (p1 == control2){
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_2, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_2, 0, true);
 
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_2, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_2, 0, false);
 
 			}
 			return false;
 		}
 		if (p1 == control3){
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_3, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_3, 0, true);
 
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_3, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_3, 0, false);
 
 			}
 			return false;
 		}
 		if (p1 == control4){
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_4, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_4, 0, true);
 
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_4, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_4, 0, false);
 
 			}
 			return false;
 		}
 		if (p1 == control5){
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_5, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_5, 0, true);
 
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_5, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_5, 0, false);
 
 			}
 			return false;
 		}
 		if (p1 == control6){
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_6, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_6, 0, true);
 
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_6, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_6, 0, false);
 
 			}
 			return false;
 		}
 		if (p1 == control7){
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_7, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_7, 0, true);
 
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_7, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_7, 0, false);
 
 			}
 			return false;
 		}
 		if (p1 == control8){
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_8, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_8, 0, true);
 
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_8, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_8, 0, false);
 
 			}
 			return false;
 		}
 		if (p1 == control9){
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_9, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_9, 0, true);
 
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_9, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_9, 0, false);
 
 			}
 			return false;
 		}
 		if (p1 == controlUp){
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_w, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_W, 0, true);
 				
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_w, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_W, 0, false);
 				
 			}
 			return false;
 		}
 		if (p1 == controlInv){
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_e, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_E, 0, true);
 
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_e, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_E, 0, false);
 
 			}
 			return false;
 		}
 		if (p1 == controlLshift){
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Shift_L, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_LEFTSHIFT, 0, true);
 
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Shift_L, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_LEFTSHIFT, 0, false);
 
 			}
 			return false;
 		}
 		if (p1 == controlDown){
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_s, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_S, 0, true);
 				
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_s, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_S, 0, false);
 				
 			}
 			return false;
 		}
 		if (p1 == controlLeft){
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_a, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_A, 0, true);
 				
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_a, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_A, 0, false);
 				
 			}
 			return false;
@@ -495,11 +531,11 @@ public class BoatActivity extends NativeActivity implements View.OnClickListener
 		if (p1 == controlRight){
 			
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_d, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_D, 0, true);
 				
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_d, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_D, 0, false);
 				
 			}
 			return false;
@@ -507,11 +543,11 @@ public class BoatActivity extends NativeActivity implements View.OnClickListener
 		if (p1 == controlJump){
 
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_space, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_SPACE, 0, true);
 				
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_space, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_SPACE, 0, false);
 				
 			}
 			return false;
@@ -519,11 +555,11 @@ public class BoatActivity extends NativeActivity implements View.OnClickListener
 		if (p1 == esc){
 
 			if (p2.getActionMasked() == MotionEvent.ACTION_DOWN){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Escape, 0, true);
+				BoatInput.setKey(BoatKeycodes.KEY_ESC, 0, true);
 
 			}
 			else if(p2.getActionMasked() == MotionEvent.ACTION_UP){
-				BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Escape, 0, false);
+				BoatInput.setKey(BoatKeycodes.KEY_ESC, 0, false);
 
 			}
 			return false;
