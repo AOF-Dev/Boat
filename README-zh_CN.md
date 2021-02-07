@@ -27,19 +27,19 @@ Android app 部分。其他软件包可在其各自的仓库里找到。参看[�
   6. 构建针对 Boat 的 LWJGL 3 。需要 GLFW 。
   
 ## 组件
-  - [OpenJDK 8 Android port](https://github.com/CosineMath/openjdk-jdk8u-aarch32-android).
-  - [Boat app project](https://github.com/CosineMath/BoatApp).
-  - [GL4ES](https://github.com/ptitSeb/gl4es).
-  - [OpenAL-soft](https://github.com/kcat/openal-soft). 
-  - [LWJGL 2 port for Boat](https://github.com/CosineMath/lwjgl-boat).
-  - [GLFW port for Boat](https://github.com/CosineMath/glfw-boat).
-  - [LWJGL 3 port for Boat](https://github.com/CosineMath/lwjgl3-boat).
+  - [OpenJDK 8 Android port](https://github.com/CosineMath/openjdk-jdk8u-aarch32-android)
+  - [Boat app project](https://github.com/CosineMath/BoatApp)
+  - [GL4ES](https://github.com/ptitSeb/gl4es)
+  - [OpenAL-soft](https://github.com/kcat/openal-soft)
+  - [LWJGL 2 port for Boat](https://github.com/CosineMath/lwjgl-boat)
+  - [GLFW port for Boat](https://github.com/CosineMath/glfw-boat)
+  - [LWJGL 3 port for Boat](https://github.com/CosineMath/lwjgl3-boat)
   - [Gson](https://github.com/google/gson)
-  - [Commons Compress](https://github.com/apache/commons-compress).
-  - [XZ for Java](https://git.tukaani.org/?p=xz-java.git;a=summary).
+  - [Commons Compress](https://github.com/apache/commons-compress)
+  - [XZ for Java](https://git.tukaani.org/?p=xz-java.git;a=summary)
   
 ## 相关项目
-  - [MCinaBox](https://github.com/AOF-Dev/MCinaBox). 一个用于 Android 的 Minecraft Java 版启动器，基于 Boat 提供 Minecraft 运行环境。
+  - [MCinaBox](https://github.com/AOF-Dev/MCinaBox)。 一个用于 Android 的 Minecraft Java 版启动器，基于 Boat 提供 Minecraft 运行环境。
   
 ## 许可
   本项目以 [GPL v2.0](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html) 授权。各个组件有其各自的许可。

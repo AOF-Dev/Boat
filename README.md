@@ -26,16 +26,16 @@ This repository contains the Android app part of Boat. Other packages could be f
   6. Build LWJGL 3 port for Boat. Need GLFW port for Boat.
   
 ## Components
-  - [OpenJDK 8 Android port](https://github.com/CosineMath/openjdk-jdk8u-aarch32-android).
-  - [Boat app project](https://github.com/CosineMath/BoatApp).
-  - [GL4ES](https://github.com/ptitSeb/gl4es).
-  - [OpenAL-soft](https://github.com/kcat/openal-soft). 
-  - [LWJGL 2 port for Boat](https://github.com/CosineMath/lwjgl-boat).
-  - [GLFW port for Boat](https://github.com/CosineMath/glfw-boat).
-  - [LWJGL 3 port for Boat](https://github.com/CosineMath/lwjgl3-boat).
+  - [OpenJDK 8 Android port](https://github.com/CosineMath/openjdk-jdk8u-aarch32-android)
+  - [Boat app project](https://github.com/CosineMath/BoatApp)
+  - [GL4ES](https://github.com/ptitSeb/gl4es)
+  - [OpenAL-soft](https://github.com/kcat/openal-soft)
+  - [LWJGL 2 port for Boat](https://github.com/CosineMath/lwjgl-boat)
+  - [GLFW port for Boat](https://github.com/CosineMath/glfw-boat)
+  - [LWJGL 3 port for Boat](https://github.com/CosineMath/lwjgl3-boat)
   - [Gson](https://github.com/google/gson)
-  - [Commons Compress](https://github.com/apache/commons-compress).
-  - [XZ for Java](https://git.tukaani.org/?p=xz-java.git;a=summary).
+  - [Commons Compress](https://github.com/apache/commons-compress)
+  - [XZ for Java](https://git.tukaani.org/?p=xz-java.git;a=summary)
   
 ## Related-Projects
   - [MCinaBox](https://github.com/AOF-Dev/MCinaBox). A Minecraft Java Edition Launcher on Android. Using Boat to provide runtime environment.
