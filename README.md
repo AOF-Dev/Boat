@@ -1,3 +1,6 @@
+# NOTE
+This branch is ABANDONED. Remains here only for study.
+
 # BoatApp
 
 This is a light weight Minecraft Java Edition launcher for Android. It is a special clone of Boardwalk (https://github.com/zhuowei/Boardwalk). For more infomation, you can refer to Boardwalk.
