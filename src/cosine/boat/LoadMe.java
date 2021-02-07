@@ -12,6 +12,7 @@ public class LoadMe {
     public static native void setenv(String str, String str2);
     public static native void setupJLI();
     public static native int dlopen(String name);
+    public static native void patchLinker();
 	
     static {
         System.loadLibrary("boat");
@@ -33,7 +34,9 @@ public class LoadMe {
             
             setenv("HOME", home);
             setenv("JAVA_HOME" ,runtimePath + "/j2re-image");
-			
+            
+	    patchLinker();
+	    
             // openjdk
             dlopen(runtimePath + "/j2re-image/lib/aarch32/libfreetype.so");
             dlopen(runtimePath + "/j2re-image/lib/aarch32/jli/libjli.so");
