@@ -32,9 +32,6 @@
             </intent-filter>
         </activity>
 		<service 
-			android:name="ru.ivanarh.jndcrash.NDCrashService" 
-			android:process=":reportprocess"/>
-		<service 
 			android:name="cosine.boat.logcat.LogcatService" 
 			android:process=":logcatprocess"/>
 		<activity android:name="BoatActivity"

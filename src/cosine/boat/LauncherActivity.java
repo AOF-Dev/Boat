@@ -73,18 +73,6 @@ public class LauncherActivity extends Activity implements View.OnClickListener, 
 		final String logPath = "/mnt/sdcard/boat/log.txt";
 		Logcat.initializeOutOfProcess( this, logPath, LogcatService.class);
 		
-		final String reportPath = "/mnt/sdcard/boat/crash.txt";
-		System.out.println("Crash report: " + reportPath);
-		final NDCrashError error = NDCrash.initializeOutOfProcess( this, reportPath, NDCrashUnwinder.libcorkscrew, NDCrashService.class);
-		if (error == NDCrashError.ok) {
-			System.out.println("NDCrash: OK");
-			// Initialization is successful. 
-		} else {
-			System.out.println("NDCrash: Error");
-			System.out.println(error.name());
-			// Initialization failed, check error value. 
-		} 
-		
         setContentView(R.layout.launcher_layout);
 		this.mHandler = new MyHandler();
         this.playButton = (Button) findViewById(R.id.launcher_play_button);
