@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="@drawable/background_layout_item"
+	android:gravity="center"
+	android:padding="10dp"
+	android:layout_margin="10dp">
+
+    <ProgressBar
+        android:id="@+id/item_listview_miodownloadProgressBar"
+        android:layout_width="match_parent"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_height="wrap_content"/>
+
+	<RelativeLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<TextView
+			android:id="@+id/item_listview_miodownloadName"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"/>
+
+		<TextView
+			android:layout_toRightOf="@id/item_listview_miodownloadName"
+			android:id="@+id/item_listview_miodownloadTextView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"/>
+
+		<Button
+			android:id="@+id/item_listview_miodownloadButtonCancle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="取消"
+			android:layout_alignParentRight="true"/>
+
+		<Button
+			android:id="@+id/item_listview_miodownloadButtonPause"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toLeftOf="@id/item_listview_miodownloadButtonCancle"
+			android:text="暂停"/>
+
+	</RelativeLayout>
+
+</LinearLayout>
+

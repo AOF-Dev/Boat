@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:id="@+id/crossingKeyboardLayout"
+	android:visibility="visible">
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_weight="1"
+			android:layout_height="match_parent">
+
+			<Button
+				android:stateListAnimator="@null"
+				android:textSize="25sp"
+				android:id="@+id/control_leftup"
+				android:background="@drawable/button_leftup"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:text="◤"
+				android:textColor="#FFFFA9A1"
+				android:layout_weight="1.0"
+				android:alpha="0"/>
+
+			<Button
+				android:stateListAnimator="@null"
+				android:textSize="32sp"
+				android:background="@drawable/button_up"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:text="@string/control_up"
+				android:textColor="#FFFFFFFF"
+				android:layout_weight="1.0"/>
+
+			<Button
+				android:stateListAnimator="@null"
+				android:textSize="25sp"
+				android:id="@+id/control_rightup"
+				android:background="@drawable/button_rightup"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:text="◥"
+				android:textColor="#FFFFA9A1"
+				android:layout_weight="1.0"
+				android:alpha="0"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_weight="1"
+			android:layout_height="match_parent">
+
+			<Button
+				android:stateListAnimator="@null"
+				android:textSize="32sp"
+				android:background="@drawable/button_left"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:textColor="#FFFFFFFF"
+				android:text="@string/control_left"
+				android:layout_weight="1.0"/>
+
+			<Button
+				android:stateListAnimator="@null"
+				android:textSize="32sp"
+				android:textColor="#FFFFFFFF"
+				android:background="@drawable/control_button"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:text="◆"
+				android:layout_weight="1.0"/>
+
+			<Button
+				android:stateListAnimator="@null"
+				android:textSize="32sp"
+				android:background="@drawable/button_right"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:textColor="#FFFFFFFF"
+				android:text="@string/control_right"
+				android:layout_weight="1.0"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1.0">
+
+			<Button
+				android:stateListAnimator="@null"
+				android:textSize="25sp"
+				android:id="@+id/control_leftdown"
+				android:background="@drawable/button_leftdown"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:textColor="#FFFFA9A1"
+				android:text="◣"
+				android:layout_weight="1.0"
+				android:alpha="0"/>
+
+			<Button
+				android:stateListAnimator="@null"
+				android:textSize="32sp"
+				android:background="@drawable/button_down"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:textColor="#FFFFFFFF"
+				android:text="@string/control_down"
+				android:layout_weight="1.0"/>
+
+			<Button
+				android:stateListAnimator="@null"
+				android:textSize="25sp"
+				android:id="@+id/control_rightdown"
+				android:background="@drawable/button_rightdown"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:textColor="#FFFFA9A1"
+				android:text="◢"
+				android:layout_weight="1.0"
+				android:alpha="0"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<Button
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:alpha="0"
+		android:id="@+id/mioKeyboard"/>
+
+</RelativeLayout>
+

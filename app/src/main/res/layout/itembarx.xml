@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+	
+	<android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+		
+	<EditText
+		android:id="@+id/ibx"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:inputType="number"
+		android:hint="(默认为735)以物品栏左边为基准呐">
+
+		<requestFocus/>
+
+	</EditText>
+	</android.support.design.widget.TextInputLayout>
+</LinearLayout>
+

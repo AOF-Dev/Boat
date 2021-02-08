@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	android:background="@mipmap/bg"
+	android:gravity="center">
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="正在检测文件完整性..."
+		android:textSize="35sp"
+		android:layout_centerInParent="true"
+		android:layout_alignParentTop="true"
+		android:textColor="#FFFFFFFF"
+		android:shadowColor="#FFFFA9A9"
+		android:shadowDx="8.0"
+		android:shadowDy="3.0"
+		android:shadowRadius="10.0"/>
+
+</LinearLayout>
+

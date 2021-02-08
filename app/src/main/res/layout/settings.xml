@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	android:gravity="center">
+
+	<ImageView
+		android:src="@drawable/ic"
+		android:layout_width="64dp"
+		android:layout_height="64dp"
+		android:onClick="toCmd"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Boat"
+		android:textSize="20sp"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="作者github:@CosineMath"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:autoLink="all"
+		android:text="项目地址：https://github.com/CosineMath/BoatApp"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:autoLink="all"
+		android:text="使用到的开源项目:(Apache-2.0 License)\nPRDownload:https://github.com/MindorksOpenSource/PRDownloader\nOWLoading:https://github.com/zhangyuChen1991/OverWatchLoading"/>
+
+	<Button
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="导入运行库"
+		android:onClick="onclick"
+		android:visibility="gone"/>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:gravity="top|left"
+		android:visibility="gone">
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="重置按键"
+			android:onClick="resetb"/>
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="终极重置"
+			android:onClick="zj"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="按键导出"
+			android:onClick="keyOut"/>
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="按键导入"
+			android:onClick="keyIn"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="鼠标选择"
+			android:onClick="customMouse"/>
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="背景选择"
+			android:onClick="customBG"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+
+		<CheckBox
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:hint="强制全屏"
+			android:id="@+id/switch_lh"/>
+
+		<CheckBox
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:hint="方形按键"
+			android:id="@+id/switc_fx"
+			android:visibility="gone"/>
+
+		<CheckBox
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:hint="摇杆"
+			android:id="@+id/switch_rocker"/>
+
+	</LinearLayout>
+
+	<TextView
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:text="按键导出位置为/sdcard/Android/data/cosine.boat/澪/key_ous.json，将按键命名为key_in.json就可以导入了"
+		android:gravity="center"/>
+
+</LinearLayout>
+

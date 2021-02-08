@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:padding="5dp"
+	android:orientation="vertical"
+	android:gravity="center">
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="250dp">
+
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center">
+
+			<TextView
+				android:text="基本设置"
+				android:textSize="10dp"
+				android:layout_gravity="left"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"/>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1px"
+				android:background="#FF000000"/>
+
+			<RelativeLayout
+				android:padding="5dp"
+				android:layout_marginTop="10dp"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<TextView
+					android:text="设置按键名称"
+					android:textSize="12sp"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="0dp"
+					android:layout_alignParentLeft="true"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"/>
+
+				<EditText
+					android:singleLine="true"
+					android:layout_width="100dp"
+					android:layout_height="wrap_content"
+					android:layout_marginRight="0dp"
+					android:layout_alignParentRight="true"
+					android:hint="按键名称"
+					android:id="@+id/ed_add_name_cmd"/>
+
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:padding="5dp"
+				android:layout_marginTop="10dp"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<TextView
+					android:text="设置按键高度(默认50)"
+					android:textSize="12sp"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="0dp"
+					android:layout_alignParentLeft="true"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"/>
+
+				<SeekBar
+					android:id="@+id/seekbar_height_cmd"
+					android:layout_width="150dp"
+					android:layout_height="wrap_content"
+					android:layout_centerVertical="true"
+					android:layout_marginRight="55dp"
+					android:layout_alignParentRight="true"
+					android:max="100"
+					android:progress="50"/>
+
+				<EditText
+					android:singleLine="true"
+					android:layout_width="50dp"
+					android:layout_height="wrap_content"
+					android:layout_marginRight="0dp"
+					android:layout_alignParentRight="true"
+					android:hint="高度"
+					android:id="@+id/ed_add_heigth_cmd"
+					android:inputType="number"
+					android:text="50"/>
+
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:padding="5dp"
+				android:layout_marginTop="10dp"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<TextView
+					android:text="设置按键宽度(默认50)"
+					android:textSize="12sp"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="0dp"
+					android:layout_alignParentLeft="true"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"/>
+
+				<SeekBar
+					android:id="@+id/seekbar_width_cmd"
+					android:layout_width="150dp"
+					android:layout_height="wrap_content"
+					android:layout_centerVertical="true"
+					android:layout_marginRight="55dp"
+					android:layout_alignParentRight="true"
+					android:max="100"
+					android:progress="50"/>
+
+				<EditText
+					android:singleLine="true"
+					android:layout_width="50dp"
+					android:layout_height="wrap_content"
+					android:layout_marginRight="0dp"
+					android:layout_alignParentRight="true"
+					android:hint="宽度"
+					android:id="@+id/ed_add_width_cmd"
+					android:inputType="number"
+					android:text="50"/>
+
+			</RelativeLayout>
+
+			<EditText
+                android:id="@+id/ed_add_cmd"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:maxLines="3"
+				android:hint="指令"/>
+
+		</LinearLayout>
+
+	</ScrollView>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1px"
+		android:background="#FF000000"/>
+
+	<RelativeLayout
+		android:layout_marginTop="5dp"
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:orientation="horizontal">
+
+		<Button
+			android:layout_marginLeft="0dp"
+			android:layout_alignParentLeft="true"
+			android:layout_width="80dp"
+			android:layout_height="match_parent"
+			android:id="@+id/positivebt_cmd"
+			android:text="确定"/>
+
+		<Button
+			android:layout_marginRight="0dp"
+			android:layout_alignParentRight="true"
+			android:layout_width="80dp"
+			android:layout_height="match_parent"
+			android:id="@+id/negativebt_cmd"
+			android:text="取消"/>
+
+	</RelativeLayout>
+
+</LinearLayout>
+

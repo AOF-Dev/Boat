@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/layout_gamedir"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:background="#8BFFFFFF"
+	android:layout_height="match_parent"
+	android:gravity="center">
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="运行库路径：/data/data/com.mio.boat/app_runtime\n游戏默认数据路径：/storage/emulated/0/boat\n其他文件路径：/storage/emulated/0/Android/data/com.mio.boat/澪\n(“澪”文件夹内的MC为整合包安装目录，MOD为MOD管理中删除的mod保存的目录，PACK为材质管理中删除的材质保存的目录runtime为运行库的压缩文件目录"/>
+
+</LinearLayout>
+

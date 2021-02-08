@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">澪-Pro</string>
+    <string name="app_version">1.0</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="app_title">澪-Pro-beta3 v1.1</string>
+    <string name="state">主页</string>
+    <string name="start">开始游戏</string>
+    <string name="version">未选择版本</string>
+    <string name="account">账号</string>
+    <string name="user">用户</string>
+    <string name="game">游戏</string>
+    <string name="gameCtr">游戏管理</string>
+    <string name="gamelist">游戏列表</string>
+    <string name="currentdir">当前目录</string>
+    <string name="launcher">启动器</string>
+    <string name="launcherSetting">游戏设置</string>
+    <string name="gamefile">游戏数据:</string>
+    <string name="install">安装</string>
+    <string name="addDownloadTask">新建下载任务</string>
+    <string name="loginEdAcTip">这里填Bugjump账号~</string>
+    <string name="loginEdPwTip">这里填密码~</string>
+    <string name="heightTip">这里填高哟（按键默认50）~</string>
+    <string name="widthTip">这里填宽哟（按键默认50）~</string>
+    <string name="basicSettings">基本设置</string>
+    <string name="btnName">按键名</string>
+    <string name="btnHeight">按键高(50)</string>
+    <string name="btnWidth">按键宽(50)</string>
+    <string name="btnTextSize">按键文本大小(14)</string>
+    <string name="btnTextColor">按键文字颜色(长按选色)</string>
+    <string name="btnStyleUp">按键样式-抬起</string>
+    <string name="btnCornerRadius">圆角半径</string>
+    <string name="btnBorderWidth">边框宽度</string>
+    <string name="btnBackgroundColor">按键背景颜色(长按选色)</string>
+    <string name="btnBorderColor">边框颜色(长按选色)</string>
+    <string name="btnStyleDown">按键样式-按下</string>
+    <string name="advancedSettings">高级设置</string>
+    <string name="selectKeys">选择按键键值</string>
+    <string name="btnSelect">选择</string>
+    <string name="btnAutoKeep">自动保持</string>
+    <string name="enable">启用</string>
+    <string name="viewControl">视角控制</string>
+    <string name="ok">确定</string>
+    <string name="cancle">取消</string>
+    <string name="customBtnOpen">自定义按键开启</string>
+    <string name="tip">提示</string>
+    <string name="sureExit">确定要退出吗？</string>
+    <string name="customBtn">自定义按键</string>
+    <string name="resetBtn">重置按键</string>
+    <string name="completelyReset">按键完全重置</string>
+    <string name="enableRocker">启用摇杆</string>
+    <string name="exitGame">退出游戏</string>
+    <string name="command">快捷命令</string>
+    <string name="cmdSetting">命令设置</string>
+    <string name="attackOrMine">攻击/挖矿模式切换</string>
+    <string name="destoryOrPlace">破坏/放置切换</string>
+    <string name="btnVisibility">按键隐藏/显示</string>
+    <string name="quickClick">连点器</string>
+    <string name="gyroscopeSwitch">陀螺仪开关</string>
+    <string name="allKey">全键开关</string>
+
+
+
+    
+</resources>

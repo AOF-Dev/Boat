@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<android.support.design.widget.TextInputLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<EditText
+			android:id="@+id/ed_change_height"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:hint="按键高(50)"
+			android:inputType="number">
+
+			<requestFocus/>
+
+		</EditText>
+
+	</android.support.design.widget.TextInputLayout>
+
+	<android.support.design.widget.TextInputLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<EditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/ed_change_width"
+			android:hint="按键宽(50)"
+			android:inputType="number"/>
+
+	</android.support.design.widget.TextInputLayout>
+
+	<android.support.design.widget.TextInputLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<EditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/ed_change_tsize"
+			android:hint="文字大小(15)"
+			android:inputType="number"/>
+
+	</android.support.design.widget.TextInputLayout>
+
+</LinearLayout>
+

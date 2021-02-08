@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:paddingTop="5dp"
+		android:paddingBottom="5dp"
+		android:background="@color/colorPrimary">
+
+		<LinearLayout
+			android:id="@+id/layout_miodownload_addtask"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="5dp"
+			android:layout_marginRight="10dp"
+			android:orientation="horizontal">
+
+			<ImageView
+				android:src="@drawable/ic_plus"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingTop="3dp"
+				android:text="@string/addDownloadTask"
+				android:textColor="#FFFFFFFF"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:padding="10dp"
+		android:background="#8BFFFFFF">
+
+		<ScrollView
+			android:layout_width="match_parent"
+            android:fillViewport="true"
+			android:layout_height="match_parent">
+
+			<LinearLayout
+				android:id="@+id/layout_miodownload_view"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical"/>
+
+		</ScrollView>
+
+	</LinearLayout>
+
+</LinearLayout>
+

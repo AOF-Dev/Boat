@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@android:id/text1"
+	android:singleLine="true"
+	android:layout_width="match_parent"
+	android:layout_height="40dp"
+	android:ellipsize="marquee"
+	android:textAlignment="inherit"
+	android:shadowColor="#FFFFA9A9"
+	android:shadowDx="5.0"
+	android:shadowDy="3.0"
+	android:shadowRadius="6.0"
+	android:textColor="#FFFFFFFF"
+	android:gravity="center"
+    android:background="@android:color/transparent" 
+	android:textSize="20sp"/>
+

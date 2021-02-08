@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/layout_setting"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:background="#8BFFFFFF"
+	android:layout_height="match_parent">
+
+	<ScrollView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="20dp"
+		android:layout_marginRight="20dp"
+		android:layout_marginTop="20dp"
+		android:padding="10dp"
+		android:background="@drawable/background_layout_item">
+
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center">
+
+			<HorizontalScrollView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content">
+
+					<Button
+						android:id="@+id/layout_settingButtonHelp"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="教程"/>
+
+					<Button
+						android:id="@+id/layout_settingButtonMouse"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="鼠标选择"/>
+
+					<Button
+						android:id="@+id/layout_settingButtonBackground"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="背景选择"/>
+
+					<Button
+						android:id="@+id/layout_settingButtonFix"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="乱码修复"/>
+
+				</LinearLayout>
+
+			</HorizontalScrollView>
+
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+
+				<CheckBox
+					android:id="@+id/layout_settingCheckBoxFull"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:hint="全屏(安卓9.0+可使用)"/>
+
+				<CheckBox
+					android:id="@+id/layout_settingCheckBoxMaK"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:hint="(暂时停用)使用外置键鼠(安卓8.0+可用)"/>
+
+			</LinearLayout>
+
+			<Button
+				android:id="@+id/layout_settingButtonUpdate"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="检测更新"
+				android:visibility="invisible"/>
+
+			<ImageView
+				android:src="@drawable/ic"
+				android:layout_width="64dp"
+				android:layout_height="64dp"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Boat"
+				android:textSize="20sp"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Boat原版作者github:@CosineMath"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:autoLink="all"
+				android:text="项目地址：https://github.com/CosineMath/BoatApp"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:autoLink="all"
+				android:text="使用到的开源项目:(Apache-2.0 License)\nPRDownload:https://github.com/MindorksOpenSource/PRDownloader\nOWLoading:https://github.com/zhangyuChen1991/OverWatchLoading"/>
+
+		</LinearLayout>
+
+	</ScrollView>
+
+</LinearLayout>
+

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@mipmap/download_bg">
+
+	<RelativeLayout
+		android:layout_width="120dp"
+		android:layout_height="120dp"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="15dp"
+		android:alpha="0.8">
+
+		<View
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:background="#FFF97297"/>
+
+		<View
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:background="#FFF97297"
+			android:layout_alignParentRight="true"/>
+
+		<View
+			android:layout_width="40dp"
+			android:layout_height="60dp"
+			android:background="#FFF97297"
+			android:layout_marginLeft="40dp"
+			android:layout_marginTop="40dp"/>
+
+		<View
+			android:layout_width="20dp"
+			android:layout_height="50dp"
+			android:background="#FFF97297"
+			android:layout_alignParentRight="true"
+			android:layout_alignParentBottom="true"
+			android:layout_marginRight="20dp"/>
+
+		<View
+			android:layout_width="20dp"
+			android:layout_height="50dp"
+			android:background="#FFF97297"
+			android:layout_alignParentBottom="true"
+			android:layout_marginLeft="20dp"/>
+
+	</RelativeLayout>
+
+	<android.support.v7.widget.CardView
+		android:layout_width="300dp"
+		android:layout_height="match_parent"
+		android:layout_gravity="center"
+		app:cardBackgroundColor="#A1FFFFFF"
+		app:cardCornerRadius="20dp"
+		android:layout_marginLeft="10dp"
+		android:layout_marginBottom="10dp"
+		android:layout_marginTop="10dp">
+
+		<RelativeLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:background="@drawable/mio_download_top"
+				android:layout_alignParentTop="true">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="运行库:"
+					android:layout_margin="10dp"
+					android:textSize="25sp"
+					android:textColor="#FFFFFFFF"
+					android:id="@+id/acdownloadTextView1"/>
+
+			</LinearLayout>
+
+			<TextView
+				android:layout_centerInParent="true"
+				android:textColor="#FFFFFFFF"
+				android:shadowColor="#FFFFA9A9"
+				android:shadowDx="8.0"
+				android:shadowDy="3.0"
+				android:shadowRadius="10.0"
+				android:id="@+id/acdownloadTextViewRuntime"
+				android:textSize="40sp"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"/>
+
+			<Button
+				android:layout_centerHorizontal="true"
+				android:layout_alignParentBottom="true"
+				android:onClick="oc_runtime"
+				android:layout_marginBottom="5dp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/install"
+				android:background="@drawable/button_fx"
+				android:textColor="#FFFFFFFF"/>
+
+		</RelativeLayout>
+
+	</android.support.v7.widget.CardView>
+
+	<android.support.v7.widget.CardView
+		android:layout_width="300dp"
+		android:layout_height="match_parent"
+		android:layout_gravity="center"
+		app:cardBackgroundColor="#A1FFFFFF"
+		app:cardCornerRadius="20dp"
+		android:layout_marginRight="10dp"
+		android:layout_marginBottom="10dp"
+		android:layout_marginTop="10dp"
+		android:layout_alignParentRight="true">
+
+		<RelativeLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<LinearLayout
+				android:layout_alignParentTop="true"
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:background="@drawable/mio_download_top">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/gamefile"
+					android:layout_margin="10dp"
+					android:textSize="25sp"
+					android:textColor="#FFFFFFFF"
+					android:id="@+id/acdownloadTextView2"/>
+
+			</LinearLayout>
+
+			<TextView
+				android:layout_centerInParent="true"
+				android:textColor="#FFFFFFFF"
+				android:shadowColor="#FFFFA9A9"
+				android:shadowDx="8.0"
+				android:shadowDy="3.0"
+				android:shadowRadius="10.0"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/acdownloadTextViewGame"
+				android:textSize="40sp"/>
+
+			<Button
+				android:layout_centerHorizontal="true"
+				android:layout_alignParentBottom="true"
+				android:onClick="oc_game"
+				android:layout_marginBottom="5dp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/install"
+				android:background="@drawable/button_fx"
+				android:textColor="#FFFFFFFF"/>
+
+		</RelativeLayout>
+
+	</android.support.v7.widget.CardView>
+
+	<Button
+		android:textColor="#FFFFFFFF"
+		android:shadowColor="#FFFFA9A9"
+		android:shadowDx="8.0"
+		android:shadowDy="3.0"
+		android:shadowRadius="10.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/start"
+		android:onClick="oc_start"
+		android:background="@drawable/button_fx"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginBottom="15dp"/>
+
+</RelativeLayout>
+

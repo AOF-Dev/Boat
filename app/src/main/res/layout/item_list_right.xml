@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:gravity="center">
+
+	<ImageView
+		android:src="@drawable/ic"
+		android:layout_width="60dp"
+		android:layout_height="60dp"/>
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_marginLeft="10dp">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="30dp"
+			android:id="@+id/item_mod_name_right"
+			android:text="ModName"
+			android:ellipsize="marquee"
+			android:textColor="#FF54EDFF"
+			android:textSize="13sp"
+			android:gravity="left|center"/>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="left|center">
+
+			<Button
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="添加"
+				android:id="@+id/item_mod_add"
+				android:textColor="#FFF97297"
+				android:padding="0dp"
+				android:background="#00000000"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:id="@+id/item_mod_info_right"
+				android:textColor="#FFFF9595"
+				android:textSize="10sp"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>
+
