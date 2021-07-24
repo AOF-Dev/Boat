@@ -187,7 +187,7 @@ typedef struct {
         BoatEventProcessor current_event_processor;
         BoatInputEvent current_event;
         
-        const char* clipboard_string;
+        char* clipboard_string;
 	
 } Boat;
 
@@ -199,6 +199,8 @@ ANativeWindow* boatGetNativeWindow();
 void* boatGetNativeDisplay();
 void boatSetCurrentEventProcessor(BoatEventProcessor);
 void boatGetCurrentEvent(BoatInputEvent*);
+void boatGetCurrentEvent(BoatInputEvent*);
+int boatGetEventPipeFd();
 void boatSetCursorMode(int);
 void boatSetCursorPos(int, int);
 void boatSetPrimaryClipString(const char*);

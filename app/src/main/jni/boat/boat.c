@@ -1,7 +1,8 @@
 
 #include <stdlib.h>
 #include <string.h>
-
+#include <unistd.h>
+#include <fcntl.h>
 #include <boat.h>
 
 ANativeWindow* boatGetNativeWindow(){	
@@ -12,11 +13,11 @@ void* boatGetNativeDisplay(){
 	return mBoat.display;
 }
 
-void boatGetCurrentEvent(BoatInputEvent* event){
+void boatGetCurrentEvent(BoatInputEvent* event) {
 	memcpy(event, &mBoat.current_event, sizeof(BoatInputEvent));
 }
 
-void boatSetCurrentEventProcessor(BoatEventProcessor processor){
+void boatSetCurrentEventProcessor(BoatEventProcessor processor) {
 	mBoat.current_event_processor = processor;
 }
 
@@ -53,6 +54,7 @@ void boatSetCursorMode(int mode){
 }
 
 void boatSetCursorPos(int x, int y){
+	/*
 	if (mBoat.android_jvm == 0){
 		return;
 	}
@@ -82,6 +84,7 @@ void boatSetCursorPos(int x, int y){
 	
 	
 	(*mBoat.android_jvm)->DetachCurrentThread(mBoat.android_jvm);
+	*/
 }
 
 void boatSetPrimaryClipString(const char* string){
@@ -179,7 +182,7 @@ JNIEXPORT void JNICALL Java_cosine_boat_BoatInput_send(JNIEnv* env, jclass clazz
 		mBoat.current_event.x = p1;
 		mBoat.current_event.y = p2;
 	}
-
+	
 	if (mBoat.current_event_processor != 0){
 		mBoat.current_event_processor();
 	}
