@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion '29.0.2'
+    ndkVersion '21.1.6352462'
+
+    defaultConfig {
+        applicationId  "cosine.boat"
+        minSdkVersion    21
+        targetSdkVersion 21
+        versionCode 20
+        versionName "0.4.3"
+
+        externalNativeBuild {
+            cmake {
+                abiFilters 'arm64-v8a'
+                arguments '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=c++_static'
+            }
+        }
+    }
+   externalNativeBuild {
+        cmake {
+            path 'src/main/jni/boat/CMakeLists.txt'
+            path 'src/main/jni/loadme/CMakeLists.txt'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled = false
+        }
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'org.tukaani:xz:1.8'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'org.apache.commons:commons-compress:1.19'
+}
