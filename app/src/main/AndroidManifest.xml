@@ -13,11 +13,16 @@
 		android:name="android.permission.ACCESS_NETWORK_STATE" />
 	
     <application 
+		android:debuggable="true"
 		android:theme="@style/BoatTheme" 
 		android:label="@string/app_name" 
 		android:largeHeap="true"
 		android:icon="@drawable/ic_boat"
-		android:name="cosine.boat.BoatApplication">
+		android:name="cosine.boat.BoatApplication"
+		android:resizeableActivity="true">
+		<meta-data 
+			android:name="android.max_aspect"
+			android:value="ratio_float"/>
         <activity 
 			android:label="@string/app_name" 
 			android:name="LauncherActivity" 
@@ -33,11 +38,12 @@
 		<activity android:name="BoatActivity"
 			android:theme="@style/FullScreenTheme"
 			android:label="@string/app_name"
-			android:configChanges="orientation|keyboardHidden"
+			android:configChanges="locale|fontScale|keyboard|keyboardHidden|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode"
 			android:screenOrientation="sensorLandscape"
-			
+			android:multiprocess="true"
+			android:process=":mainprocess"
 			android:excludeFromRecents="false"
-			android:launchMode="singleInstance"
+			android:launchMode="standard"
 			android:alwaysRetainTaskState="true">
 			
         </activity>
