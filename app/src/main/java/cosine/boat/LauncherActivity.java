@@ -7,10 +7,6 @@ import android.widget.EditText;
 import android.os.Bundle;
 import cosine.boat.logcat.Logcat;
 import cosine.boat.logcat.LogcatService;
-import ru.ivanarh.jndcrash.NDCrashError;
-import ru.ivanarh.jndcrash.NDCrash;
-import ru.ivanarh.jndcrash.NDCrashService;
-import ru.ivanarh.jndcrash.NDCrashUnwinder;
 import android.content.Intent;
 import android.widget.TextView;
 import java.io.*;
@@ -204,11 +200,13 @@ public class LauncherActivity extends Activity implements View.OnClickListener, 
 			
 			
             Intent i = new Intent(this, BoatActivity.class);
+			i.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+			i.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
 			Bundle bundle=new Bundle();
 			bundle.putString("config", configText.getText().toString());
 			i.putExtras(bundle);
 			this.startActivity(i);
-			
+			this.finish();
 			
         }
 		else if(v == this.excuteButton){
