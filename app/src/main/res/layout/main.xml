@@ -2,23 +2,63 @@
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-
-	<Button
-		android:id="@+id/touch_pad"
+	android:layout_height="fill_parent"
+	android:id="@+id/main_base">
+	<!--android:background="#FF000000"-->
+		
+	<TextureView
+		android:id="@+id/main_surface"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:layout_marginLeft="0dp"
 		android:layout_marginBottom="0dp"
 		android:layout_alignParentLeft="true"
-		android:layout_alignParentTop="true"
-		android:alpha="0.0"/>
-
+		android:layout_alignParentTop="true"/>
+	
 	<ImageView
 		android:layout_height="16dp"
 		android:layout_width="16dp"
 		android:src="@drawable/cursor"
 		android:id="@+id/mouse_cursor"/>
+	
+	<com.mojang.minecraftpe.TextInputProxyEditTextbox
+		android:textSize="20sp"
+		android:id="@+id/text_box"
+		android:layout_width="54dp"
+		android:layout_height="27dp"
+		android:singleLine="true"
+		android:inputType="text"
+		android:text=""
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true"
+		android:layout_marginLeft="0dp"
+		android:layout_marginTop="0dp"
+		android:visibility="gone"
+		android:background="@drawable/control_button"/>
+	
+	<Button
+		android:textSize="20sp"
+		android:id="@+id/mouse_primary"
+		android:background="@drawable/control_button"
+		android:layout_width="54dp"
+		android:layout_height="54dp"
+		android:text="@string/mouse_primary"
+		android:layout_marginLeft="0dp"
+		android:layout_marginBottom="122dp"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentBottom="true"/>
+
+	<Button
+		android:textSize="20sp"
+		android:id="@+id/mouse_secondary"
+		android:background="@drawable/control_button"
+		android:layout_width="54dp"
+		android:layout_height="54dp"
+		android:text="@string/mouse_secondary"
+		android:layout_marginLeft="108dp"
+		android:layout_marginBottom="122dp"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentBottom="true"/>
 
 	<Button
 		android:textSize="32sp"
@@ -191,30 +231,20 @@
 
 	</LinearLayout>
 
+	
+
 	<Button
 		android:textSize="20sp"
-		android:id="@+id/mouse_primary"
+		android:id="@+id/esc"
 		android:background="@drawable/control_button"
 		android:layout_width="54dp"
 		android:layout_height="54dp"
-		android:text="@string/mouse_primary"
 		android:layout_marginLeft="0dp"
-		android:layout_marginBottom="122dp"
+		android:layout_marginTop="0dp"
+		android:text="@string/esc"
 		android:layout_alignParentLeft="true"
-		android:layout_alignParentBottom="true"/>
-
-	<Button
-		android:textSize="20sp"
-		android:id="@+id/mouse_secondary"
-		android:background="@drawable/control_button"
-		android:layout_width="54dp"
-		android:layout_height="54dp"
-		android:text="@string/mouse_secondary"
-		android:layout_marginLeft="108dp"
-		android:layout_marginBottom="122dp"
-		android:layout_alignParentLeft="true"
-		android:layout_alignParentBottom="true"/>
-
+		android:layout_alignParentTop="true"/>
+	
 	<Button
 		android:textSize="20sp"
 		android:id="@+id/control_command"
@@ -229,13 +259,13 @@
 
 	<Button
 		android:textSize="20sp"
-		android:id="@+id/control_chat"
+		android:id="@+id/control_debug"
 		android:background="@drawable/control_button"
 		android:layout_width="54dp"
 		android:layout_height="54dp"
 		android:layout_marginLeft="108dp"
 		android:layout_marginTop="0dp"
-		android:text="@string/control_chat"
+		android:text="@string/control_debug"
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentTop="true"/>
 
@@ -250,34 +280,21 @@
 		android:text="@string/control_thirdperson"
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentTop="true"/>
-
+	
 	<Button
 		android:textSize="20sp"
-		android:id="@+id/esc"
+		android:id="@+id/show_ime"
 		android:background="@drawable/control_button"
 		android:layout_width="54dp"
 		android:layout_height="54dp"
-		android:layout_marginLeft="0dp"
+		android:layout_marginLeft="216dp"
 		android:layout_marginTop="0dp"
-		android:text="@string/esc"
+		android:text="@string/control_ime"
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentTop="true"/>
-
-	<EditText
-		android:textSize="20sp"
-		android:id="@+id/input_scanner"
-		android:layout_width="54dp"
-		android:layout_height="54dp"
-		android:layout_marginRight="0dp"
-		android:layout_marginTop="0dp"
-		android:layout_alignParentRight="true"
-		android:layout_alignParentTop="true"
-		android:ems="10"
-		android:background="#DD7F7F7F"
-		android:singleLine="true"
-		android:inputType="text"
-		android:alpha="0.3"
-		android:text="&gt;"/>
+	
+	
+	
 
 </RelativeLayout>
 
