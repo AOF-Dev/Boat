@@ -2,6 +2,8 @@ package cosine.boat;
 import java.util.*;
 import com.google.gson.*;
 import java.io.*;
+import java.lang.reflect.*;
+import com.google.gson.reflect.*;
 
 public class MinecraftVersion
 {
@@ -40,6 +42,101 @@ public class MinecraftVersion
 	public String time;
 	public String type;
 	
+	public class Rule {
+		String action;
+		HashMap<String, Boolean> os;
+		HashMap<String, Boolean> features;
+	}
+	public class RuledArgument extends Argument
+	{
+		public Rule rules[];
+		public String value[];
+		@Override
+		public String[] getValue(HashMap<String, Boolean> features, HashMap<String, String> os)
+		{
+			// TODO: Implement this method
+			for (Rule r : rules) {
+				if (r.features != null) {
+					for (Map.Entry<String, Boolean> e : r.features.entrySet()) {
+						if (e.getValue() != features.get(e.getKey())) {
+							if (r.action != null && r.action.equals("allow")) {
+								return null;
+							}
+						}
+					}
+					for (Map.Entry<String, Boolean> e : r.os.entrySet()) {
+						if (e.getValue() != null && !e.getValue().equals(os.get(e.getKey()))) {
+							if (r.action != null && r.action.equals("allow")) {
+								return null;
+							}
+						}
+					}
+				}
+			}
+			return value;
+		}
+		
+		
+	}
+	public class RuledArgumentJsonDeserializer implements JsonDeserializer<RuledArgument> {
+		@Override
+		public MinecraftVersion.RuledArgument deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+		{
+			// TODO: Implement this method
+			JsonObject obj = json.getAsJsonObject();
+			RuledArgument result = new RuledArgument();
+			result.rules = context.deserialize(obj.get("rules"), Rule[].class);
+			if (obj.get("value").isJsonPrimitive()) {
+				result.value = new String[]{obj.get("value").getAsString()};
+			}
+			else {
+				result.value = context.deserialize(obj.get("value"), String[].class);
+			}
+			return result;
+		}
+	}
+	
+	public class StringArgument extends Argument
+	{
+		public String value;
+		public StringArgument(String v) {
+			this.value = v;
+		}
+		@Override
+		public String[] getValue(HashMap<String, Boolean> features, HashMap<String, String> os)
+		{
+			// TODO: Implement this method
+			return new String[] {value};
+		}
+		
+		
+	}
+	
+	public abstract class Argument
+	{
+		public abstract String[] getValue(HashMap<String, Boolean> features, HashMap<String, String> os);
+	}
+	public class ArgumentJsonDeserializer implements JsonDeserializer<Argument> {
+		@Override
+		public MinecraftVersion.Argument deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+		{
+			// TODO: Implement this method
+			if (json.isJsonPrimitive()) {
+				return new StringArgument(json.getAsString());
+			}
+			else {
+				return context.deserialize(json, RuledArgument.class);
+			}
+		}
+	}
+	
+	
+	public class Arguments {
+		public Argument game[];
+		public Argument jvm[];
+	}
+	
+	//public Arguments arguments;
 	// forge
 	public String inheritsFrom;
 	
@@ -183,9 +280,9 @@ public class MinecraftVersion
 	
 	public String[] getMinecraftArguments(LauncherConfig config){
 		String test = new String(this.minecraftArguments);
-		
+
 		String result = "";
-		
+
 		int state = 0;
 		int start = 0;
 		int stop = 0;
@@ -193,7 +290,7 @@ public class MinecraftVersion
 			if (state == 0 ){
 				if (test.charAt(i) != '$'){
 					result = result + test.charAt(i);
-					
+
 				}
 				else{
 					if ( i + 1 < test.length() && test.charAt(i + 1) == '{'){
@@ -203,33 +300,33 @@ public class MinecraftVersion
 					else{
 						result = result + test.charAt(i);
 					}
-					
+
 				}
 				continue;
 			}
 			else{
 				if (test.charAt(i) == '}'){
 					stop = i;
-					
+
 					String key = test.substring(start + 2, stop);
-					
+
 					String value = "";
-					
+
 					if (key != null && key.equals("version_name")){
 						value = id;
 					}
 					else if (key != null && key.equals("assets_index_name")){
-						
-						
+
+
 						if (assetIndex != null){
 							value = assetIndex.id;
 						}
 						else{
 							value = assets;
 						}
-						
+
 					}
-					
+
 					else{
 						value = config.get(key);
 					}
@@ -240,5 +337,8 @@ public class MinecraftVersion
 			}
 		}
 		return result.split(" ");
+	
+		
 	}
+	
 }
