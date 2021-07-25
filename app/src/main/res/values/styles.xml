@@ -7,12 +7,12 @@
     <style name="BoatActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/theme_primary</item>
     </style>
-		
-	<style name="FullScreenTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">
-		<item name="android:windowFullscreen">true</item>
-		<item name="android:windowTranslucentNavigation">true</item>
-		<item name="android:windowNoTitle">true</item>
+
+    <style name="FullScreenTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowContentOverlay">@null</item>
-	</style>
+    </style>
 </resources>

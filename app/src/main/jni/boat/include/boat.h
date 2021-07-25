@@ -164,31 +164,23 @@
 typedef int (*BoatEventProcessor)();
 
 typedef struct {
-        long long time;
-        char type;
-    
-        char mouse_button;
-        int x;
-        int y;
-    
-        int keycode;
-        int keychar;
-	
+    long long time;
+    char type;
+    char mouse_button;
+    int x;
+    int y;
+    int keycode;
+    int keychar;
 } BoatInputEvent;
 
 typedef struct {
-	
-        ANativeWindow* window;
-        void* display;
-	
-        JavaVM* android_jvm;
-        jclass class_BoatInput;
-	
-        BoatEventProcessor current_event_processor;
-        BoatInputEvent current_event;
-        
-        char* clipboard_string;
-	
+    ANativeWindow* window;
+    void* display;
+    JavaVM* android_jvm;
+    jclass class_BoatInput;
+    BoatEventProcessor current_event_processor;
+    BoatInputEvent current_event;
+    char* clipboard_string;
 } Boat;
 
 #ifdef BUILD_BOAT
@@ -207,3 +199,4 @@ void boatSetPrimaryClipString(const char*);
 const char* boatGetPrimaryClipString();
 
 #endif
+
