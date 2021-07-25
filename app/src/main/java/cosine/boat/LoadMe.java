@@ -16,11 +16,9 @@ public class LoadMe {
         System.loadLibrary("loadme");
     }
 
-    public static int exec(LauncherConfig config, int w, int h) {
+    public static int exec(int w, int h) {
         try {
-
-            //MinecraftVersion mcVersion = MinecraftVersion.fromDirectory(new File(config.get("currentVersion")));
-            String runtimePath = config.get("runtimePath");
+            String runtimePath = "/data/user/0/jackpal.androidterm/app_HOME/boat_runtime/aarch64";
 
             String arch = "aarch64";
             String vm_variant = "server";
@@ -30,7 +28,7 @@ public class LoadMe {
 
             patchLinker();
 
-            String home = config.get("home");
+            String home = "/sdcard/boat";
             String tmpdir = BoatApplication.getCurrentActivity().getCacheDir().getAbsolutePath();
 
             //String classPath = config.get("runtimePath") + "/lwjgl-2/lwjgl.jar:" + config.get("runtimePath") + "/lwjgl-2/lwjgl_util.jar:" + mcVersion.getClassPath(config);
@@ -522,55 +520,7 @@ public class LoadMe {
              "--height", 
              "" + h, 
              };
-             
             */
-            
-            /*
-             File so_map = new File("/proc/self/maps");
-             BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(so_map)));
-
-             File map_log= new File("/sdcard/boat/boat_mem_maps.txt");
-             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(map_log)));
-             String line;
-             while((line = br.readLine()) != null){
-             bw.write(line + "\n");
-
-             }
-             */
-            /*
-             Vector<String> args = new Vector<String>();
-
-             args.add(runtimePath +  "/j2re-image/bin/java");
-             args.add("-cp");
-             args.add(classPath);
-             args.add("-Djava.library.path=" + libraryPath);
-
-             args.add("-Dorg.lwjgl.util.Debug=true");
-             args.add("-Dorg.lwjgl.util.DebugLoader=true");
-
-
-             String extraJavaFlags[] = config.get("extraJavaFlags").split(" ");
-             for (String flag : extraJavaFlags){
-             args.add(flag);
-             }
-
-             args.add(mcVersion.mainClass);
-             String minecraftArgs[] = mcVersion.getMinecraftArguments(config);    
-
-             for (String flag : minecraftArgs){
-             args.add(flag);
-             }
-             String extraMinecraftArgs[] = config.get("extraMinecraftFlags").split(" ");
-             for (String flag : extraMinecraftArgs){
-             args.add(flag);
-             }
-             String finalArgs[] = new String[args.size()];
-             for (int i = 0; i < args.size(); i++){
-
-             finalArgs[i] = args.get(i);
-             System.out.println(finalArgs[i]);
-             }
-             */
         } catch (Exception e) {
             e.printStackTrace();
             return 1;

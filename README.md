@@ -11,7 +11,7 @@
   Boat provides an environment to run Minecraft Java Edition on Android. It evolves from zhuowei's [Boarwalk](https://github.com/zhuowei/Boardwalk). Boat includes a series of Android ports of important software packages.
 This repository contains the Android app part of Boat. Other packages could be found in respective repositories. Please look at [Components](#Components).
   
-  This app includes a very simple Minecraft launcher, only for test.
+  This app is NOT a Minecraft launcher.
 ## Building  
   It takes time to build whole project. So it is not suggested to build whole one youself. But you may want to build and update some components. Please follow the instructions in the repositories.
   

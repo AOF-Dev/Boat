@@ -11,7 +11,7 @@
   Boat 提供一个在 Android 上运行 Mincraft Java 版的环境，显然它不是一个模拟器。它起源自 zhuowei 的 [Boarwalk](https://github.com/zhuowei/Boardwalk)。Boat 提供一系列开源软件的 Android 移植，例如 OpenJDK。这个仓库存储的是 Boat 的 
 Android app 部分。其他软件包可在其各自的仓库里找到。参看[组件](#组件)。
   
-  这个 app 包含一个非常简单的 Minecraft 启动器，仅仅用于开发中的测试。
+  这个 app 不是一个 Minecraft 启动器。
   
 ## 构建  
   要构建整个项目是非常麻烦的，所以我们不建议你自己从源码构建整个项目。不过你可能希望自己构建和更新某些组件。请参看仓库中关于构建的说明。

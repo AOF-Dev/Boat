@@ -210,8 +210,7 @@ public class BoatActivity extends Activity implements View.OnTouchListener, Text
         new Thread() {
             @Override
             public void run() {
-                LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
-                LoadMe.exec(config, w, h);        
+                LoadMe.exec(w, h);
                 Message msg = new Message();
                 msg.what = -1;
                 mHandler.sendMessage(msg);
