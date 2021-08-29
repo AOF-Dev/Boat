@@ -29,6 +29,8 @@
 #define Mod4Mask                (1<<6)
 #define Mod5Mask                (1<<7)
 
+#define CloseRequest            0
+
 typedef struct {
     long long time;
     int type;
