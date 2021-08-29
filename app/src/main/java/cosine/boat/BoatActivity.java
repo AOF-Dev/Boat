@@ -177,7 +177,7 @@ public class BoatActivity extends Activity implements View.OnTouchListener, Text
 
     @Override
     public void onBackPressed() {
-        // TODO: Implement this method
+        BoatLib.pushEventMessage(BoatLib.CloseRequest);
     }
 
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
@@ -215,7 +215,7 @@ public class BoatActivity extends Activity implements View.OnTouchListener, Text
 
     @Override
     public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-        // TODO: Implement this method
+        BoatLib.pushEventWindow(width, height);
     }
 
     @Override

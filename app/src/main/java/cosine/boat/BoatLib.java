@@ -36,6 +36,8 @@ public class BoatLib {
     public static final int Mod4Mask              = 1 << 6;
     public static final int Mod5Mask              = 1 << 7;
 
+    public static final int CloseRequest          = 0;
+
     static {
         System.loadLibrary("boat");
     }
