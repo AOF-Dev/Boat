@@ -13,6 +13,8 @@ public class BoatLib {
     public static final int ButtonPress           = 4;
     public static final int ButtonRelease         = 5;
     public static final int MotionNotify          = 6;
+    public static final int ConfigureNotify       = 22;
+    public static final int BoatMessage           = 37;
 
     public static final int Button1               = 1;
     public static final int Button2               = 2;
@@ -24,6 +26,15 @@ public class BoatLib {
 
     public static final int CursorEnabled         = 1;
     public static final int CursorDisabled        = 0;
+
+    public static final int ShiftMask             = 1 << 0;
+    public static final int LockMask              = 1 << 1;
+    public static final int ControlMask           = 1 << 2;
+    public static final int Mod1Mask              = 1 << 3;
+    public static final int Mod2Mask              = 1 << 4;
+    public static final int Mod3Mask              = 1 << 5;
+    public static final int Mod4Mask              = 1 << 6;
+    public static final int Mod5Mask              = 1 << 7;
 
     static {
         System.loadLibrary("boat");
@@ -41,6 +52,12 @@ public class BoatLib {
     }
     public static void pushEventKey(int keyCode, int keyChar, boolean press) {
         BoatLib.pushEvent(System.nanoTime(), press ? KeyPress : KeyRelease, keyCode, keyChar);
+    }
+    public static void pushEventWindow(int width, int height) {
+        BoatLib.pushEvent(System.nanoTime(), ConfigureNotify, width, height);
+    }
+    public static void pushEventMessage(int msg) {
+        BoatLib.pushEvent(System.nanoTime(), BoatMessage, msg, 0);
     }
  
     // BoatLib callbacks
