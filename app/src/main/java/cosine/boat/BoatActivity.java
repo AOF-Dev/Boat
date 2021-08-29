@@ -21,7 +21,6 @@ import android.text.TextWatcher;
 import android.text.Editable;
 import android.view.inputmethod.EditorInfo;
 import android.view.KeyEvent;
-import android.view.SurfaceHolder;
 import android.view.ViewGroup;
 import android.view.TextureView;
 import android.graphics.SurfaceTexture;
@@ -111,8 +110,8 @@ public class BoatActivity extends Activity implements View.OnTouchListener, Text
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     Log.w("mcpe - keyboard", "onEditorAction: " + actionId);
                     //BoatActivity.this.nativeReturnKeyPressed();
-                    BoatInput.setKey(BoatKeycodes.KEY_ENTER, '\n', true);
-                    BoatInput.setKey(BoatKeycodes.KEY_ENTER, '\n', false);
+                    BoatLib.pushEventKey(BoatKeycodes.KEY_ENTER, '\n', true);
+                    BoatLib.pushEventKey(BoatKeycodes.KEY_ENTER, '\n', false);
                     return false;
 
                 }
@@ -129,8 +128,8 @@ public class BoatActivity extends Activity implements View.OnTouchListener, Text
                     String newText = s.toString();
                     if (newText.length() > 0){
                         for(int i = 0; i < newText.length(); i++){
-                            BoatInput.setKey(0, newText.charAt(i), true);
-                            BoatInput.setKey(0, newText.charAt(i), false);
+                            BoatLib.pushEventKey(0, newText.charAt(i), true);
+                            BoatLib.pushEventKey(0, newText.charAt(i), false);
                         }
 
                         BoatActivity.this.textInputWidget.setText("");
@@ -142,8 +141,8 @@ public class BoatActivity extends Activity implements View.OnTouchListener, Text
                     BoatActivity.this.runOnUiThread(new Runnable() {
                             public void run() {
                                 //BoatActivity.this.nativeBackSpacePressed();
-                                BoatInput.setKey(BoatKeycodes.KEY_BACKSPACE, 0, true);
-                                BoatInput.setKey(BoatKeycodes.KEY_BACKSPACE, 0, false);
+                                BoatLib.pushEventKey(BoatKeycodes.KEY_BACKSPACE, 0, true);
+                                BoatLib.pushEventKey(BoatKeycodes.KEY_BACKSPACE, 0, false);
                             }
                         });
                 }
@@ -181,14 +180,10 @@ public class BoatActivity extends Activity implements View.OnTouchListener, Text
         // TODO: Implement this method
     }
 
-    public static native void setBoatNativeWindow(Surface surface);
-    static {
-        System.loadLibrary("boat");
-    }
-
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
         System.out.println("SurfaceTexture is available!");
-        BoatActivity.setBoatNativeWindow(new Surface(surface));
+        BoatLib.setBoatNativeWindow(new Surface(surface));
+        BoatLib.setEventPipe();
 
         final int w = width;
         final int h = height;
@@ -219,31 +214,23 @@ public class BoatActivity extends Activity implements View.OnTouchListener, Text
     }
 
     @Override
-    public void onSurfaceTextureSizeChanged(SurfaceTexture p1, int p2, int p3) {
+    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
         // TODO: Implement this method
     }
 
     @Override
-    public boolean onSurfaceTextureDestroyed(SurfaceTexture p1) {
+    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
         return false;
     }
 
     @Override
-    public void onSurfaceTextureUpdated(SurfaceTexture p1) {
+    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
         // TODO: Implement this method
     }
 
     public void setCursorMode(int mode) { 
         Message msg = new Message();
         msg.what = mode;
-        mHandler.sendMessage(msg);
-    }
-
-    public void setCursorPos(int x, int y) {
-        Message msg = new Message();
-        msg.what = BoatInput.CursorSetPos;
-        msg.arg1 = x;
-        msg.arg2 = y;
         mHandler.sendMessage(msg);
     }
 
@@ -281,27 +268,23 @@ public class BoatActivity extends Activity implements View.OnTouchListener, Text
         return b;
     }
 
-    public int cursorMode = BoatInput.CursorEnabled;
+    public int cursorMode = BoatLib.CursorEnabled;
 
     private class MyHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case BoatInput.CursorDisabled:
+                case BoatLib.CursorDisabled:
                     hideKeyboard();
                     BoatActivity.this.mouseCursor.setVisibility(View.INVISIBLE);
                     BoatActivity.this.itemBar.setVisibility(View.VISIBLE);
-                    BoatActivity.this.cursorMode = BoatInput.CursorDisabled;
+                    BoatActivity.this.cursorMode = BoatLib.CursorDisabled;
                     break;
                 
-                case BoatInput.CursorEnabled:
+                case BoatLib.CursorEnabled:
                     BoatActivity.this.mouseCursor.setVisibility(View.VISIBLE);
                     BoatActivity.this.itemBar.setVisibility(View.INVISIBLE);
-                    BoatActivity.this.cursorMode = BoatInput.CursorEnabled;
-                    break;
-                case BoatInput.CursorSetPos:
-                    BoatActivity.this.mouseCursor.setX((float)msg.arg1);
-                    BoatActivity.this.mouseCursor.setY((float)msg.arg2);
+                    BoatActivity.this.cursorMode = BoatLib.CursorEnabled;
                     break;
                 default:
                     BoatActivity.this.finish();
@@ -320,7 +303,7 @@ public class BoatActivity extends Activity implements View.OnTouchListener, Text
     @Override
     public boolean onTouch(View p1, MotionEvent p2) {
         if (p1 == showIME) {
-            if (p2.getActionMasked() == MotionEvent.ACTION_UP && this.cursorMode == BoatInput.CursorEnabled) {
+            if (p2.getActionMasked() == MotionEvent.ACTION_UP && this.cursorMode == BoatLib.CursorEnabled) {
                 this.showKeyboard();
             }
             return false;
@@ -330,28 +313,28 @@ public class BoatActivity extends Activity implements View.OnTouchListener, Text
             if (textBoxShowing != false) {
                 hideKeyboard();
             }
-            if (cursorMode == BoatInput.CursorDisabled) {
+            if (cursorMode == BoatLib.CursorDisabled) {
                 switch(p2.getActionMasked()) {
                     case MotionEvent.ACTION_DOWN:
                         initialX = (int)p2.getX();
                         initialY = (int)p2.getY();
                     case MotionEvent.ACTION_MOVE:
-                        BoatInput.setPointer(baseX + (int)p2.getX() -initialX, baseY + (int)p2.getY() - initialY);
+                        BoatLib.pushEventPointer(baseX + (int)p2.getX() -initialX, baseY + (int)p2.getY() - initialY);
                         break;
                     case MotionEvent.ACTION_UP:
                         baseX += ((int)p2.getX() - initialX);
                         baseY += ((int)p2.getY() - initialY);
 
-                        BoatInput.setPointer(baseX, baseY);
+                        BoatLib.pushEventPointer(baseX, baseY);
                         break;
                     default:
                         break;
                 }
             }
-            else if (cursorMode == BoatInput.CursorEnabled) {
+            else if (cursorMode == BoatLib.CursorEnabled) {
                 baseX = (int)p2.getX();
                 baseY = (int)p2.getY();
-                BoatInput.setPointer(baseX, baseY);
+                BoatLib.pushEventPointer(baseX, baseY);
             }
 
             mouseCursor.setX(p2.getX());
@@ -365,91 +348,91 @@ public class BoatActivity extends Activity implements View.OnTouchListener, Text
         
         boolean down = p2.getActionMasked() == MotionEvent.ACTION_DOWN;
         if (p1 == mousePrimary) {
-            BoatInput.setMouseButton(BoatInput.Button1, down);
+            BoatLib.pushEventMouseButton(BoatLib.Button1, down);
             return false;
         }
         if (p1 == mouseSecondary) {
-            BoatInput.setMouseButton(BoatInput.Button3, down);
+            BoatLib.pushEventMouseButton(BoatLib.Button3, down);
             return false;
         }
         if (p1 == controlUp) {
-            BoatInput.setKey(BoatKeycodes.KEY_W, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_W, 0, down);
             return false;
         }
         if (p1 == controlDown) {
-            BoatInput.setKey(BoatKeycodes.KEY_S, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_S, 0, down);
             return false;
         }
         if (p1 == controlLeft) {
-            BoatInput.setKey(BoatKeycodes.KEY_A, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_A, 0, down);
             return false;
         }
         if (p1 == controlRight) {
-            BoatInput.setKey(BoatKeycodes.KEY_D, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_D, 0, down);
             return false;
         }
         if (p1 == controlJump) {
-            BoatInput.setKey(BoatKeycodes.KEY_SPACE, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_SPACE, 0, down);
             return false;
         }
         if (p1 == esc) {
-            BoatInput.setKey(BoatKeycodes.KEY_ESC, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_ESC, 0, down);
             return false;
         }
         if (p1 == controlInv) {
-            BoatInput.setKey(BoatKeycodes.KEY_E, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_E, 0, down);
             return false;
         }
         if (p1 == controlLshift) {
-            BoatInput.setKey(BoatKeycodes.KEY_LEFTSHIFT, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_LEFTSHIFT, 0, down);
             return false;
         }
         if (p1 == control1) {
-            BoatInput.setKey(BoatKeycodes.KEY_1, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_1, 0, down);
             return false;
         }
         if (p1 == control2) {
-            BoatInput.setKey(BoatKeycodes.KEY_2, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_2, 0, down);
             return false;
         }
         if (p1 == control3) {
-            BoatInput.setKey(BoatKeycodes.KEY_3, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_3, 0, down);
             return false;
         }
         if (p1 == control4) {
-            BoatInput.setKey(BoatKeycodes.KEY_4, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_4, 0, down);
             return false;
         }
         if (p1 == control5) {
-            BoatInput.setKey(BoatKeycodes.KEY_5, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_5, 0, down);
             return false;
         }
         if (p1 == control6) {
-            BoatInput.setKey(BoatKeycodes.KEY_6, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_6, 0, down);
             return false;
         }
         if (p1 == control7) {
-            BoatInput.setKey(BoatKeycodes.KEY_7, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_7, 0, down);
             return false;
         }
         if (p1 == control8) {
-            BoatInput.setKey(BoatKeycodes.KEY_8, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_8, 0, down);
             return false;
         }
         if (p1 == control9) {
-            BoatInput.setKey(BoatKeycodes.KEY_9, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_9, 0, down);
             return false;
         }
         if (p1 == controlDebug) {    
-            BoatInput.setKey(BoatKeycodes.KEY_F3, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_F3, 0, down);
             return false;
         }
         if (p1 == controlCommand) {
-            BoatInput.setKey(BoatKeycodes.KEY_SLASH, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_SLASH, 0, down);
             return false;
         }
         if (p1 == control3rd) {
-            BoatInput.setKey(BoatKeycodes.KEY_F5, 0, down);
+            BoatLib.pushEventKey(BoatKeycodes.KEY_F5, 0, down);
             return false;
         }
         return false; 
