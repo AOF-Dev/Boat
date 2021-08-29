@@ -36,6 +36,7 @@ typedef struct {
     int type;
     int state;
     int button;
+    int message;
     int x;
     int y;
     int keycode;
