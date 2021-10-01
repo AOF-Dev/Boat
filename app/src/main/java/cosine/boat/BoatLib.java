@@ -1,8 +1,6 @@
 package cosine.boat;
 
 import android.view.Surface;
-import android.content.Context;
-import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.ClipData;
 
@@ -61,36 +59,28 @@ public class BoatLib {
     public static void pushEventMessage(int msg) {
         BoatLib.pushEvent(System.nanoTime(), BoatMessage, msg, 0);
     }
- 
+
     // BoatLib callbacks
     public static void setCursorMode(int mode) {
-        Activity activity = BoatApplication.getCurrentActivity();
-        if (activity instanceof BoatActivity){
-            BoatActivity boatActivity = (BoatActivity)activity;
-            boatActivity.setCursorMode(mode);
-        }
+        BoatActivity boat_activity = BoatActivity.getCurrentInstance();
+        boat_activity.setCursorViewMode(mode);
     }
 
     public static void setPrimaryClipString(String string) {
-        Activity activity = BoatApplication.getCurrentActivity();
-        if (activity instanceof BoatActivity){
-            ClipboardManager clipboard = (ClipboardManager)activity.getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("Boat Clipboard", string);
-            clipboard.setPrimaryClip(clip);
-        }
+        BoatActivity boat_activity = BoatActivity.getCurrentInstance();
+        ClipboardManager clipboard = (ClipboardManager)boat_activity.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("Boat Clipboard", string);
+        clipboard.setPrimaryClip(clip);
     }
 
     public static String getPrimaryClipString() {
-        Activity activity = BoatApplication.getCurrentActivity();
-        if (activity instanceof BoatActivity){
-            ClipboardManager clipboard = (ClipboardManager)activity.getSystemService(Context.CLIPBOARD_SERVICE);
-            if (!clipboard.hasPrimaryClip()) {
-                return null;
-            }
-            ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
-            return item.getText().toString();
+        BoatActivity boat_activity = BoatActivity.getCurrentInstance();
+        ClipboardManager clipboard = (ClipboardManager)boat_activity.getSystemService(Context.CLIPBOARD_SERVICE);
+        if (!clipboard.hasPrimaryClip()) {
+            return null;
         }
-        return null;
+        ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+        return item.getText().toString();
     }
 }
 
