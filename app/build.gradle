@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 29
@@ -6,7 +6,6 @@ android {
     ndkVersion '21.1.6352462'
 
     defaultConfig {
-        applicationId  "cosine.boat"
         minSdkVersion    21
         targetSdkVersion 21
         versionCode 24
@@ -39,4 +38,5 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.google.code.gson:gson:2.8.2'
 }
