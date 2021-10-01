@@ -14,7 +14,9 @@ Xboat X server 等项目。请参看 [相关项目](#相关项目)。
 ## 构建 
   通过 gradle 可以轻松构建 Android library 的 aar 包，不过也可以直接使用源码。请注意，仅支持 aarch64。原来对 32位 arm 的支持已经放弃，理论上
 还可以使用不过我们不再测试。
+
   `export ANDROID_SDK_ROOT=你的 Android SDK 路径`
+
   `./gradlew assembleDebug`
   
 ## 相关项目

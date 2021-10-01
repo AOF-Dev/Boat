@@ -13,7 +13,9 @@ Initilaly, Boat is just for playing Minecraft Java Edition on Android. Currently
 
 ## Building  
   It is very simple to build the aar package. *NOTE*，only support aarch64。32bit arm has been abandoned and is never tested.
-  `export ANDROID_SDK_ROOT=你的 Android SDK 路径`
+
+  `export ANDROID_SDK_ROOT=Your Android SDK path`
+
   `./gradlew assembleDebug`
   
 ## Related-Projects
