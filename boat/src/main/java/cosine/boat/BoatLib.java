@@ -3,6 +3,7 @@ package cosine.boat;
 import android.view.Surface;
 import android.content.ClipboardManager;
 import android.content.ClipData;
+import android.content.Context;
 
 public class BoatLib {
 
