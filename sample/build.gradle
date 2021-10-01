@@ -1,0 +1,31 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion '29.0.2'
+    ndkVersion '21.1.6352462'
+
+    defaultConfig {
+        applicationId  "cosine.boat"
+        minSdkVersion    21
+        targetSdkVersion 21
+        versionCode 24
+        versionName "0.5.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled = false
+        }
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':boat')
+}
